@@ -150,6 +150,15 @@ main{max-width:1320px}
 .prize-details strong{display:block;color:var(--forest);font-size:.94rem}
 .prize-card small{margin-top:8px}
 @media(max-width:600px){.success-modal{max-height:88vh;padding:18px}.detail-list{grid-template-columns:1fr;gap:1px;padding:12px}.detail-list dd{margin-bottom:8px}.success-modal .success-icon{width:42px;height:42px;font-size:1.45rem}.prize-podium{gap:12px}}
+
+/* Clean success header, editable organizer phone slots, Christmas red accents */
+.success-modal .success-icon{display:grid;place-items:center;width:48px;height:48px;margin:0 0 12px;background:linear-gradient(145deg,#e8f4e9,#fff);border:1px solid #c9dfcb;border-radius:14px}
+.success-modal h2{display:flex;flex-direction:column;gap:2px;line-height:1.2;color:var(--forest);overflow-wrap:anywhere}
+.success-modal h2 span+span{font-family:"DM Sans",system-ui,sans-serif;font-size:.72em;color:var(--wine);font-weight:800}
+.success-modal p span{color:#6d1020}
+.organizer-phone{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:7px 11px;border-radius:9px;background:#8f1825;color:#fff!important;font-weight:800;font-size:.88rem;text-decoration:none}
+.organizer-card{border-top:3px solid #8f1825}
+@media(max-width:600px){.success-modal h2{font-size:clamp(1.25rem,5vw,1.55rem)}}
 </style>
 </head>
 <body>
@@ -198,7 +207,7 @@ main{max-width:1320px}
 <div class="full"><button id="submit" type="submit">Submit Registration | രജിസ്റ്റർ ചെയ്യുക <span aria-hidden="true">→</span></button><div id="status" class="status" role="status" aria-live="polite"></div></div>
 </div></form></section>
 <section id="video" class="reveal"><div class="video-card"><img class="singer" src="assets/carol-singer.png" alt="Carol singer in a festive Christmas setting"><div><h2>Video Submission | വീഡിയോ സമർപ്പണം</h2><p>Video submissions will be collected separately through WhatsApp. Registered participants will receive submission instructions from the organizers.</p><p class="ml">വീഡിയോകൾ WhatsApp വഴി പ്രത്യേകം സ്വീകരിക്കും. രജിസ്റ്റർ ചെയ്തവർക്ക് സംഘാടകർ വീഡിയോ സമർപ്പണ നിർദ്ദേശങ്ങൾ നൽകുന്നതാണ്.</p></div></div></section>
-<section id="organizers" class="reveal organizers-section"><div class="section-kicker">MEET THE TEAM</div><h2>Organizing Committee | സംഘാടകർ</h2><p class="section-lead">A sample layout for coordinators and committee members. Replace demo names and photos with confirmed details.</p><div class="organizer-grid"><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Chief Coordinator</span><h3>Demo Name One</h3><p>Event Coordination</p></div></article><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Coordinator</span><h3>Demo Name Two</h3><p>Participant Support</p></div></article><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Committee Member</span><h3>Demo Name Three</h3><p>Media & Communications</p></div></article></div></section><section id="contact" class="contact reveal">
+<section id="organizers" class="reveal organizers-section"><div class="section-kicker">MEET THE TEAM</div><h2>Organizing Committee | സംഘാടകർ</h2><p class="section-lead">A sample layout for coordinators and committee members. Replace demo names and photos with confirmed details.</p><div class="organizer-grid"><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Chief Coordinator</span><h3>Demo Name One</h3><p>Event Coordination</p><a class="organizer-phone" href="tel:+910000000001">☎ Add phone number</a></div></article><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Coordinator</span><h3>Demo Name Two</h3><p>Participant Support</p><a class="organizer-phone" href="tel:+910000000002">☎ Add phone number</a></div></article><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Committee Member</span><h3>Demo Name Three</h3><p>Media & Communications</p><a class="organizer-phone" href="tel:+910000000003">☎ Add phone number</a></div></article></div></section><section id="contact" class="contact reveal">
 <h2>Connect with the Organizers | സംഘാടകരുമായി ബന്ധപ്പെടുക</h2>
 <p class="contact-lead">For registration support, competition details, and video submission guidance, contact our coordination team directly on WhatsApp.</p>
 <div class="contact-main"><h3>Official WhatsApp Contact</h3><p>+91 99466 70571</p><a class="wa-link" href="https://wa.me/919946670571?text=Hello%20CAROLIA%202026%20Organizers" target="_blank" rel="noopener">Message the Organizers ↗</a></div>
@@ -206,9 +215,9 @@ main{max-width:1320px}
 </main>
 <div id="successModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="successTitle">
   <div class="success-modal">
-    <div class="success-icon" aria-hidden="true">🎄✅</div>
-    <h2 id="successTitle">Registration Successful! | രജിസ്ട്രേഷൻ വിജയിച്ചു</h2>
-    <p>നിങ്ങളുടെ രജിസ്ട്രേഷൻ വിജയകരമായി സമർപ്പിച്ചു. ഈ Registration ID സൂക്ഷിക്കുക.</p>
+    <div class="success-icon" aria-hidden="true">🎄</div>
+    <h2 id="successTitle"><span>Registration Successful!</span><span lang="ml">രജിസ്ട്രേഷൻ വിജയിച്ചു</span></h2>
+    <p>Registration submitted successfully. Please save your Registration ID.<br><span lang="ml">രജിസ്ട്രേഷൻ വിജയകരമായി സമർപ്പിച്ചു. Registration ID സൂക്ഷിക്കുക.</span></p>
     <div id="registrationId" class="registration-id"></div>
     <dl id="registrationDetails" class="detail-list"></dl>
     <div class="modal-actions">
