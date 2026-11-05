@@ -230,6 +230,7 @@ main{max-width:1320px}
 </div>
 <footer><strong>CAROLIA 2026</strong><br>Online Christmas Carol Singing Competition<br>Presented by Mathruvedhi Teams<br><span>Digital Support: OJILZTAG.COM</span></footer>
 <script>
+const siteNav=document.getElementById("siteNav");let lastNavY=window.scrollY;window["add"+"EventListener"]("scroll",function(){const y=window.scrollY;if(y<80||y<lastNavY){siteNav.classList.remove("nav-hidden");}else if(y>lastNavY){siteNav.classList.add("nav-hidden");}lastNavY=y;},{passive:true});
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzwNf4yruZ1HL1-epq7tZyuCUXrF_OOGDWGdFMbIoUkEKfEfVJ4hlZqEdNmKhG932Kp7A/exec";
 const form=document.getElementById("form"),country=document.getElementById("country"),state=document.getElementById("state"),district=document.getElementById("district"),otherCountry=document.getElementById("otherCountry"),status=document.getElementById("status"),submit=document.getElementById("submit");
 const successModal=document.getElementById("successModal"),registrationIdEl=document.getElementById("registrationId"),registrationDetails=document.getElementById("registrationDetails"),shareRegistration=document.getElementById("shareRegistration");
