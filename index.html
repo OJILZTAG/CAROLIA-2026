@@ -29,7 +29,7 @@ header .presenter{font-weight:800;letter-spacing:.12em;color:#ffe9b0;text-transf
 header .tagline{margin:10px 0 0;font-family:"Playfair Display",serif;font-size:clamp(1.15rem,3vw,1.8rem);color:#fff8e4}
 nav{position:sticky;top:8px;z-index:20;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px;width:fit-content;max-width:calc(100% - 28px);margin:0 auto 16px;padding:8px 10px;background:#fffdf8f5;border:1px solid #e8d7a6;border-radius:16px;box-shadow:0 8px 24px #3b180d12;transition:transform .2s,opacity .2s}
 nav a{text-decoration:none;color:var(--wine);font-weight:800;font-size:.78rem;padding:6px 9px;border-radius:8px;transition:.2s;white-space:nowrap;flex:0 0 auto}nav.nav-hidden{transform:translateY(-150%);opacity:0;pointer-events:none}nav a:hover{background:#f8e7b8;transform:translateY(-1px)}
-main{max-width:1120px;margin:auto;padding:26px 18px 50px}
+main{max-width:1280px;margin:auto;padding:30px 22px 64px}
 .hero{position:relative;margin:0 auto 30px;animation:fadeUp .8s .1s both}.poster{display:block;width:100%;height:auto;border:4px solid #f2c45b;border-radius:22px;box-shadow:var(--shadow)}
 .poster-caption{position:relative;margin:-2px 16px 0;background:linear-gradient(90deg,var(--forest),#0a7048);color:white;text-align:center;padding:13px 16px;border-radius:0 0 16px 16px;font-weight:800;box-shadow:0 8px 20px #06432b22}
 section{position:relative;scroll-margin-top:112px;margin:28px 0;padding:clamp(22px,4vw,38px);background:#fffdf7;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);animation:fadeUp .7s both}
@@ -230,7 +230,7 @@ main{max-width:1320px}
 </div>
 <footer><strong>CAROLIA 2026</strong><br>Online Christmas Carol Singing Competition<br>Presented by Mathruvedhi Teams<br><span>Digital Support: OJILZTAG.COM</span></footer>
 <script>
-const siteNav=document.getElementById("siteNav");let lastNavY=window.scrollY;window["add"+"EventListener"]("scroll",function(){const y=window.scrollY;if(y<80||y<lastNavY){siteNav.classList.remove("nav-hidden");}else if(y>lastNavY){siteNav.classList.add("nav-hidden");}lastNavY=y;},{passive:true});
+const siteNav=document.getElementById("siteNav");let lastNavY=window.scrollY;let navTicking=false;window.addEventListener("scroll",function(){if(navTicking)return;navTicking=true;requestAnimationFrame(()=>{const y=window.scrollY;if(y<100||y<lastNavY-2){siteNav.classList.remove("nav-hidden");}else if(y>lastNavY+2){siteNav.classList.add("nav-hidden");}lastNavY=y;navTicking=false;});},{passive:true});
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzwNf4yruZ1HL1-epq7tZyuCUXrF_OOGDWGdFMbIoUkEKfEfVJ4hlZqEdNmKhG932Kp7A/exec";
 const form=document.getElementById("form"),country=document.getElementById("country"),state=document.getElementById("state"),district=document.getElementById("district"),otherCountry=document.getElementById("otherCountry"),status=document.getElementById("status"),submit=document.getElementById("submit");
 const successModal=document.getElementById("successModal"),registrationIdEl=document.getElementById("registrationId"),registrationDetails=document.getElementById("registrationDetails"),shareRegistration=document.getElementById("shareRegistration");
@@ -262,7 +262,7 @@ document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
 /* Compact, festive spacing and bilingual rhythm */
 nav#siteNav{margin:14px auto 18px;top:0;max-width:calc(100% - 24px);padding:7px 9px;gap:5px;border:1px solid #d8b65b;border-radius:13px;background:linear-gradient(180deg,#fffdf7,#f8efdc);box-shadow:0 5px 16px #35100d12}
 nav#siteNav a{font-size:.78rem;padding:5px 9px;line-height:1.25;border-color:#e5d3a5}
-@media(max-width:520px){nav#siteNav{margin:10px auto 14px;padding:6px;gap:4px}nav#siteNav a{font-size:.72rem;padding:5px 7px}}
+@media(max-width:520px){nav#siteNav{top:8px;width:calc(100% - 20px);padding:8px;gap:6px;grid-template-columns:repeat(3,minmax(0,1fr))}nav#siteNav a{font-size:.78rem;padding:8px 5px;white-space:normal;text-align:center}}
 .prize-section{background:radial-gradient(ellipse at top,#fff9e8 0%,#fffdf8 52%,#f5f8f2 100%);border-color:#e4c875}
 .prize-intro{line-height:1.45;margin-bottom:8px}
 .prize-podium{margin:16px 0;gap:12px}
@@ -292,8 +292,8 @@ body:before{background:radial-gradient(circle at 8% 12%,#ffe6a655,transparent 24
 
 <style>
 /* Final layout polish */
-nav#siteNav{position:relative;top:auto;transform:none;max-width:calc(100% - 32px);margin:12px auto 18px}
-nav#siteNav.nav-hidden{transform:translateY(-140%);position:fixed;top:0;left:50%;translate:-50% 0;z-index:50;max-width:calc(100% - 24px);box-shadow:0 8px 26px #24070b30}
+nav#siteNav{position:fixed;top:12px;left:50%;translate:-50% 0;transform:translateY(0);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:min(760px,calc(100% - 32px));max-width:none;margin:0;padding:10px;gap:8px;z-index:50;box-shadow:0 10px 30px #24070b20;transition:transform .32s ease,opacity .32s ease}
+nav#siteNav.nav-hidden{transform:translate(-50%,-150%);opacity:0;pointer-events:none}
 .prize-section h2{text-align:center}
 .prize-section h2:after{content:" ✦";display:inline}
 .prize-podium{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}
@@ -311,4 +311,13 @@ nav#siteNav.nav-hidden{transform:translateY(-140%);position:fixed;top:0;left:50%
 #contact.contact h2{font-size:clamp(1.55rem,4.2vw,2.35rem);margin-bottom:18px}
 #contact.contact .contact-lead{font-size:clamp(1rem,2.2vw,1.15rem);line-height:1.65;margin:10px auto;max-width:760px}
 #contact.contact .ml{background:#ffffff10;border-left:3px solid #f6cc68;border-radius:0 10px 10px 0;padding:14px 18px}
+</style>
+
+<style>
+/* Final smooth navigation and spacious page frame */
+main{max-width:1280px;padding:clamp(24px,3.5vw,44px) clamp(16px,2.5vw,30px) 70px}
+section{padding:clamp(26px,4.5vw,48px);margin:24px 0;border-radius:20px}
+nav#siteNav a{min-width:0;display:flex;align-items:center;justify-content:center;min-height:42px;font-size:clamp(.78rem,1.2vw,.9rem);padding:9px 8px;line-height:1.25;overflow-wrap:anywhere}
+@media(max-width:520px){main{padding:22px 12px 48px}section{padding:26px 18px;margin:20px 0}nav#siteNav a{font-size:.76rem;min-height:40px}}
+@media(prefers-reduced-motion:reduce){nav#siteNav{transition:none}}
 </style>
