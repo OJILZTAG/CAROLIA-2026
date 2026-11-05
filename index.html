@@ -131,6 +131,25 @@ main{max-width:1320px;padding-left:clamp(18px,4vw,56px);padding-right:clamp(18px
 .modal-backdrop{background:#101c19df;backdrop-filter:blur(10px)}.success-modal{position:relative;border:1px solid #d7ad55;border-radius:24px;background:linear-gradient(160deg,#fff,#f7f8f3);padding:clamp(24px,5vw,42px);box-shadow:0 30px 100px #0005}.success-modal:before{content:"CAROLIA 2026";display:block;font-size:.72rem;font-weight:900;letter-spacing:.18em;color:#8a6b2c;margin-bottom:12px}.success-modal .success-icon{display:inline-grid;place-items:center;width:58px;height:58px;border-radius:18px;background:#eaf4ed;font-size:1.8rem}.success-modal h2{margin-top:14px;color:#174b3e}.success-modal h2:after{display:none}.registration-id{background:#f7f1df;border-color:#d7ad55;border-radius:14px}.detail-list{padding:16px;border:1px solid #e6e8e0;border-radius:14px;background:#fff}.share-button{padding:11px 18px;font-size:.9rem;box-shadow:0 3px 0 #08713a}.modal-actions{justify-content:flex-end}.modal-actions button{flex:0 1 auto}.close-button{padding:11px 16px}
 @media(max-width:900px){.organizer-grid{grid-template-columns:1fr 1fr}.organizer-card{align-items:flex-start;flex-direction:column}.organizer-card img{width:76px;height:76px;flex-basis:76px}}
 @media(max-width:600px){.organizer-grid{grid-template-columns:1fr}.organizer-card{flex-direction:row;align-items:center}.organizer-card img{width:72px;height:72px;flex-basis:72px}.modal-actions button{width:100%}}
+
+/* Final tidy: wider unified Christmas layout and compact bilingual success card */
+main{max-width:1320px}
+.success-modal{width:min(760px,100%);padding:clamp(18px,3vw,28px);border-radius:20px;background:linear-gradient(145deg,#fffdf8,#fff8e8)}
+.success-modal h2{font-size:clamp(1.35rem,3.5vw,1.85rem);margin:4px 0 8px}
+.success-modal .success-icon{display:inline-grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#eaf4eb;font-size:1.8rem;vertical-align:middle;margin:0 12px 8px 0}
+.success-modal p{font-size:clamp(.95rem,2.3vw,1.08rem);margin:8px 0 14px}
+.registration-id{margin:12px 0;padding:12px;font-size:clamp(1rem,3.2vw,1.4rem)}
+.detail-list{grid-template-columns:1fr 1.4fr;gap:6px 12px;padding:16px;border:1px solid #e8e4d9;border-radius:14px;background:#fff}
+.detail-list dt{font-size:.9rem}.detail-list dd{font-size:.95rem}
+.modal-actions{margin-top:14px}
+.prize-card{display:flex;flex-direction:column;align-items:stretch}
+.prize-photo-slot{min-height:150px}
+.prize-details{display:grid;gap:8px;text-align:left;margin-top:auto}
+.prize-details>div{padding:10px 12px;border:1px solid #eadfbe;border-radius:10px;background:#fffdf8}
+.prize-details span{display:block;color:var(--muted);font-size:.8rem;font-weight:800}
+.prize-details strong{display:block;color:var(--forest);font-size:.94rem}
+.prize-card small{margin-top:8px}
+@media(max-width:600px){.success-modal{max-height:88vh;padding:18px}.detail-list{grid-template-columns:1fr;gap:1px;padding:12px}.detail-list dd{margin-bottom:8px}.success-modal .success-icon{width:42px;height:42px;font-size:1.45rem}.prize-podium{gap:12px}}
 </style>
 </head>
 <body>
@@ -153,7 +172,7 @@ main{max-width:1320px;padding-left:clamp(18px,4vw,56px);padding-right:clamp(18px
 <div class="prize-podium">
 <article class="prize-card prize-first"><div class="prize-rank">🏆 <span>1st Prize</span></div><h3>First Prize</h3><p>ഒന്നാം സമ്മാനം</p><div class="prize-photo-slot"><div><span class="photo-icon">🖼️</span>First Prize Sponsor Image / Logo<small>ഇവിടെ സ്പോൺസറുടെ ചിത്രം ചേർക്കാം</small></div></div><div class="prize-details"><div><span>Prize</span><strong>Prize details to be announced</strong></div><div><span>Presented by</span><strong>Sponsor name to be announced</strong></div></div></article>
 <article class="prize-card prize-second"><div class="prize-rank">🥈 <span>2nd Prize</span></div><h3>Second Prize</h3><p>രണ്ടാം സമ്മാനം</p><div class="prize-photo-slot"><div><span class="photo-icon">🖼️</span>Second Prize Sponsor Image / Logo<small>ഇവിടെ സ്പോൺസറുടെ ചിത്രം ചേർക്കാം</small></div></div><div class="prize-details"><div><span>Prize</span><strong>Prize details to be announced</strong></div><div><span>Presented by</span><strong>Sponsor name to be announced</strong></div></div></article>
-<article class="prize-card prize-third"><div class="prize-rank">🥉 <span>3rd Prize</span></div><h3>Third Prize</h3><p>മൂന്നാം സമ്മാനം</p><div class="prize-photo-slot"><div><span class="photo-icon">🖼️</span>Third Prize Sponsor Image / Logo<small>ഇവിടെ സ്പോൺസറുടെ ചിത്രം ചേർക്കാം</small></div></div><small>Prize details and sponsor name</small></article>
+<article class="prize-card prize-third"><div class="prize-rank">🥉 <span>3rd Prize</span></div><h3>Third Prize</h3><p>മൂന്നാം സമ്മാനം</p><div class="prize-photo-slot"><div><span class="photo-icon">🖼️</span>Third Prize Sponsor Image / Logo<small>ഇവിടെ സ്പോൺസറുടെ ചിത്രം ചേർക്കാം</small></div></div><div class="prize-details"><div><span>Prize</span><strong>Prize details to be announced</strong></div><div><span>Presented by</span><strong>Sponsor name to be announced</strong></div></div></article>
 </div>
 <div class="encouragement-panel"><div class="encouragement-head"><span class="gift-icon">🎁</span><div><h3>10 Encouragement Prizes</h3><p>10 പ്രോത്സാഹന സമ്മാനങ്ങൾ</p></div><span class="sponsor-pill">Sponsored by OJILZTAG.COM</span></div>
 <p>OJILZTAG.COM will present encouragement prizes to 10 eligible participants to recognize audience engagement and promote participation.</p>
@@ -166,17 +185,17 @@ main{max-width:1320px;padding-left:clamp(18px,4vw,56px);padding-right:clamp(18px
 <section id="participate" class="reveal"><h2>How to Participate | എങ്ങനെ പങ്കെടുക്കാം</h2><div class="steps"><div class="step"><div class="num">1</div><b>Register | രജിസ്റ്റർ</b>Complete the form below.<br>ഫോം പൂരിപ്പിക്കുക.</div><div class="step"><div class="num">2</div><b>Prepare | തയ്യാറാകുക</b>Practice and record your carol.<br>കരോൾ പരിശീലിച്ച് റെക്കോർഡ് ചെയ്യുക.</div><div class="step"><div class="num">3</div><b>Submit Video | വീഡിയോ അയയ്ക്കുക</b>Follow organizer instructions.<br>സംഘാടകരുടെ നിർദ്ദേശങ്ങൾ പാലിക്കുക.</div><div class="step"><div class="num">4</div><b>Stay Tuned | അറിയിപ്പുകൾ</b>Watch for updates.<br>പുതിയ അറിയിപ്പുകൾ ശ്രദ്ധിക്കുക.</div></div></section>
 <section id="registration" class="form-section reveal"><h2>Official Registration · ഔദ്യോഗിക രജിസ്ട്രേഷൻ</h2><p class="form-lead">Please complete the required details. · ആവശ്യമായ വിവരങ്ങൾ പൂരിപ്പിക്കുക.</p>
 <form id="form"><div class="form-grid">
-<div><label for="participantName">Participant Name *</label><input id="participantName" name="participantName" required maxlength="120" autocomplete="name"></div>
-<div><label for="parishName">Your Own Parish Name *</label><input id="parishName" name="parishName" required maxlength="160"><div class="field-help">Enter your own Parish, not the Parish of your current residence.</div></div>
-<div><label for="diocese">Your Own Diocese *</label><input id="diocese" name="diocese" required maxlength="160"><div class="field-help">Enter your own Diocese, not the Diocese of your current residence.</div></div>
-<div><label for="country">Current Country of Residence *</label><select id="country" name="country" required><option value="India">India</option><option value="Other">Outside India</option></select><div class="field-help">Select the country where you currently live and will participate from.</div></div>
-<div id="otherCountryWrap" hidden><label for="otherCountry">Current Country Name *</label><input id="otherCountry" name="otherCountry" maxlength="100" placeholder="Enter your current country"></div>
-<div><label for="state">Current State / Province *</label><input id="state" name="state" required maxlength="100" placeholder="Enter state or province"></div>
-<div><label for="district">Current District / Region *</label><input id="district" name="district" required maxlength="100" placeholder="Enter district or region"></div>
-<div class="full"><label for="phone">Contact Mobile Number (with WhatsApp) *</label><input id="phone" name="phone" type="tel" required maxlength="30" placeholder="Include country code, e.g. +91XXXXXXXXXX"><span class="field-note">Use the international dialing code so organizers can contact you.</span></div>
-<div class="full"><label>Competition Category</label><input id="competitionCategory" name="competitionCategory" value="Individual / Single Category" readonly></div>
-<div class="full check"><input id="rulesAccepted" type="checkbox" required><label for="rulesAccepted">I have read and agree to the competition rules and regulations. *</label></div>
-<div class="full"><button id="submit" type="submit">Submit Registration <span aria-hidden="true">→</span></button><div id="status" class="status" role="status" aria-live="polite"></div></div>
+<div><label for="participantName">Participant Name | പങ്കെടുക്കുന്നയാളുടെ പേര് *</label><input id="participantName" name="participantName" required maxlength="120" autocomplete="name"></div>
+<div><label for="parishName">Your Own Parish Name | സ്വന്തം ഇടവകയുടെ പേര് *</label><input id="parishName" name="parishName" required maxlength="160"><div class="field-help">Enter your own Parish, not the Parish of your current residence.</div></div>
+<div><label for="diocese">Your Own Diocese | സ്വന്തം രൂപതയുടെ പേര് *</label><input id="diocese" name="diocese" required maxlength="160"><div class="field-help">Enter your own Diocese, not the Diocese of your current residence.</div></div>
+<div><label for="country">Current Country of Residence | നിലവിലെ താമസരാജ്യം *</label><select id="country" name="country" required><option value="India">India</option><option value="Other">Outside India</option></select><div class="field-help">Select the country where you currently live and will participate from.</div></div>
+<div id="otherCountryWrap" hidden><label for="otherCountry">Current Country Name | രാജ്യത്തിന്റെ പേര് *</label><input id="otherCountry" name="otherCountry" maxlength="100" placeholder="Enter your current country"></div>
+<div><label for="state">Current State / Province | സംസ്ഥാനം / പ്രവിശ്യ *</label><input id="state" name="state" required maxlength="100" placeholder="Enter state or province"></div>
+<div><label for="district">Current District / Region | ജില്ല / പ്രദേശം *</label><input id="district" name="district" required maxlength="100" placeholder="Enter district or region"></div>
+<div class="full"><label for="phone">Contact Mobile Number (with WhatsApp) | WhatsApp നമ്പർ *</label><input id="phone" name="phone" type="tel" required maxlength="30" placeholder="Include country code, e.g. +91XXXXXXXXXX"><span class="field-note">Use the international dialing code so organizers can contact you.</span></div>
+<div class="full"><label>Competition Category | മത്സര വിഭാഗം</label><input id="competitionCategory" name="competitionCategory" value="Individual / Single Category" readonly></div>
+<div class="full check"><input id="rulesAccepted" type="checkbox" required><label for="rulesAccepted">I have read and agree to the competition rules | മത്സര നിബന്ധനകൾ വായിച്ച് അംഗീകരിക്കുന്നു. *</label></div>
+<div class="full"><button id="submit" type="submit">Submit Registration | രജിസ്റ്റർ ചെയ്യുക <span aria-hidden="true">→</span></button><div id="status" class="status" role="status" aria-live="polite"></div></div>
 </div></form></section>
 <section id="video" class="reveal"><div class="video-card"><img class="singer" src="assets/carol-singer.png" alt="Carol singer in a festive Christmas setting"><div><h2>Video Submission | വീഡിയോ സമർപ്പണം</h2><p>Video submissions will be collected separately through WhatsApp. Registered participants will receive submission instructions from the organizers.</p><p class="ml">വീഡിയോകൾ WhatsApp വഴി പ്രത്യേകം സ്വീകരിക്കും. രജിസ്റ്റർ ചെയ്തവർക്ക് സംഘാടകർ വീഡിയോ സമർപ്പണ നിർദ്ദേശങ്ങൾ നൽകുന്നതാണ്.</p></div></div></section>
 <section id="organizers" class="reveal organizers-section"><div class="section-kicker">MEET THE TEAM</div><h2>Organizing Committee | സംഘാടകർ</h2><p class="section-lead">A sample layout for coordinators and committee members. Replace demo names and photos with confirmed details.</p><div class="organizer-grid"><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Chief Coordinator</span><h3>Demo Name One</h3><p>Event Coordination</p></div></article><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Coordinator</span><h3>Demo Name Two</h3><p>Participant Support</p></div></article><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Committee Member</span><h3>Demo Name Three</h3><p>Media & Communications</p></div></article></div></section><section id="contact" class="contact reveal">
@@ -188,12 +207,12 @@ main{max-width:1320px;padding-left:clamp(18px,4vw,56px);padding-right:clamp(18px
 <div id="successModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="successTitle">
   <div class="success-modal">
     <div class="success-icon" aria-hidden="true">🎄✅</div>
-    <h2 id="successTitle">Registration Successful!</h2>
+    <h2 id="successTitle">Registration Successful! | രജിസ്ട്രേഷൻ വിജയിച്ചു</h2>
     <p>നിങ്ങളുടെ രജിസ്ട്രേഷൻ വിജയകരമായി സമർപ്പിച്ചു. ഈ Registration ID സൂക്ഷിക്കുക.</p>
     <div id="registrationId" class="registration-id"></div>
     <dl id="registrationDetails" class="detail-list"></dl>
     <div class="modal-actions">
-      <button id="shareRegistration" class="share-button" type="button">Share Registration · രജിസ്ട്രേഷൻ പങ്കിടുക ↗</button>
+      <button id="shareRegistration" class="share-button" type="button">Share Details · വിവരങ്ങൾ പങ്കിടുക ↗</button>
     </div>
   </div>
 </div>
