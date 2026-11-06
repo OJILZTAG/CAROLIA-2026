@@ -437,7 +437,30 @@ function closeSuccess(){successModal.classList.remove('open');document.body.styl
 
 successModal.addEventListener('click',e=>{if(e.target===successModal)closeSuccess()});
 function registrationShareText(){if(!lastRegistration)return '';const d=lastRegistration.details;const registeredAtText=new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeStyle:'short'}).format(lastRegistration.registeredAt);return `🎄 CAROLIA 2026 – REGISTRATION SUCCESSFUL!\n\nRegistration ID: ${lastRegistration.registrationId}\nRegistered On: ${registeredAtText}\nParticipant: ${d.participantName}\nParish: ${d.parishName}\nDiocese: ${d.diocese}\nResidence: ${d.country}, ${d.state}, ${d.district}\nWhatsApp: ${d.phone}\nCategory: Individual / Single Category\n\n🌐 Registration Website:\nhttps://carolia.ojilztag.com/\n\nPlease save your Registration ID.`;}
-shareRegistration.addEventListener('click',()=>{if(!lastRegistration)return;const text=registrationShareText();const whatsappUrl='https://wa.me/?text='+encodeURIComponent(text);window.open(whatsappUrl,'_blank','noopener,noreferrer');});
+shareRegistration.addEventListener('click',async()=>{
+  if(!lastRegistration)return;
+  const text=registrationShareText();
+  const shareData={title:"CAROLIA 2026 – Registration Successful",text:text};
+  try{
+    if(navigator.share){
+      await navigator.share(shareData);
+    }else if(navigator.clipboard&&navigator.clipboard.writeText){
+      await navigator.clipboard.writeText(text);
+      shareRegistration.textContent="Copied — share it anywhere";
+    }else{
+      const field=document.createElement("textarea");
+      field.value=text;field.setAttribute("readonly","");
+      field.style.position="fixed";field.style.opacity="0";
+      document.body.appendChild(field);field.select();
+      const copied=document.execCommand("copy");field.remove();
+      shareRegistration.textContent=copied?"Copied — share it anywhere":"Sharing is not available on this browser";
+    }
+  }catch(error){
+    if(error&&error.name!=="AbortError"){
+      shareRegistration.textContent="Sharing unavailable — try again";
+    }
+  }
+});
 
 
 // Public status lookup – Registration ID only.
