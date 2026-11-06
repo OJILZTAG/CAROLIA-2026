@@ -57,7 +57,8 @@ input{border-radius:11px}.record{border-color:#e7dcc5;border-radius:14px;box-sha
 #loginForm button{display:flex;min-width:180px;margin:18px auto 0;justify-content:center}
 #searchForm .full:last-child,#passwordForm .full:last-child{display:flex;flex-direction:column;align-items:center}
 #searchButton,#passwordButton{min-width:220px}
-#loginStatus{text-align:center}</style>
+#loginStatus{text-align:center}.record-share-button{display:flex;width:100%;justify-content:center;margin:14px 0 0;background:#087b50;color:#fff;border-radius:10px;padding:12px 16px;font-weight:800}
+</style>
 </head>
 <body>
 <header class="admin-header"><div class="admin-brand"><span class="admin-mark">✦</span><div><h1>CAROLIA 2026</h1><p>Administration Portal · Mathruvedhi Teams</p></div></div><a class="home-button" href="index.html">← Back to Home</a></header>
@@ -135,7 +136,8 @@ function sendRequest(payload,callback){
 function showRecords(containerId,records){
   const container=document.getElementById(containerId);
   if(!Array.isArray(records)||!records.length){container.innerHTML='<p class="small">No matching registrations found.</p>';return;}
-  container.innerHTML=records.map(r=>'<article class="record"><h3>'+escapeHtml(r.registrationId)+'</h3><dl>'+
+  container._records=records;
+  container.innerHTML=records.map((r,index)=>'<article class="record"><h3>'+escapeHtml(r.registrationId)+'</h3><dl>'+
     '<dt>Submitted At</dt><dd>'+escapeHtml(r.submittedAt)+'</dd>'+
     '<dt>Participant</dt><dd>'+escapeHtml(r.participantName)+'</dd>'+
     '<dt>Parish</dt><dd>'+escapeHtml(r.parishName)+'</dd>'+
@@ -146,8 +148,33 @@ function showRecords(containerId,records){
     '<dt>WhatsApp Number</dt><dd>'+escapeHtml(r.phone)+'</dd>'+
     '<dt>Category</dt><dd>'+escapeHtml(r.competitionCategory)+'</dd>'+
     '<dt>Rules Accepted</dt><dd>'+escapeHtml(r.rulesAccepted)+'</dd>'+
-    '</dl></article>').join("");
+    '</dl><button type="button" class="record-share-button" data-record-index="'+index+'">Share This Registration ↗</button></article>').join("");
 }
+function registrationRecordShareText(r){
+  return 'CAROLIA 2026 – REGISTRATION DETAILS\\n\\n'+
+    'Registration ID: '+(r.registrationId||'')+'\\n'+
+    'Registered On: '+(r.submittedAt||'')+'\\n'+
+    'Participant: '+(r.participantName||'')+'\\n'+
+    'Parish: '+(r.parishName||'')+'\\n'+
+    'Diocese: '+(r.diocese||'')+'\\n'+
+    'Residence: '+[r.country,r.state,r.district].filter(Boolean).join(', ')+'\\n'+
+    'WhatsApp: '+(r.phone||'')+'\\n'+
+    'Category: '+(r.competitionCategory||'Individual / Single Category')+'\\n\\n'+
+    'Registration Website: https://carolia.ojilztag.com/';
+}
+document.addEventListener('click',async event=>{
+  const button=event.target.closest('.record-share-button');
+  if(!button)return;
+  const card=button.closest('.record'),container=card&&card.parentElement;
+  const record=container&&container._records&&container._records[Number(button.dataset.recordIndex)];
+  if(!record)return;
+  const text=registrationRecordShareText(record);
+  try{
+    if(navigator.share){await navigator.share({title:'CAROLIA 2026 Registration',text:text});}
+    else if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(text);button.textContent='Copied — share anywhere';}
+    else{button.textContent='Sharing is not supported on this browser';}
+  }catch(error){if(error&&error.name!=='AbortError')button.textContent='Could not share — try again';}
+});
 
 function loadDashboard(){
   sendRequest({action:"admindashboard",sessionToken:sessionToken},data=>{
