@@ -202,6 +202,12 @@ main{max-width:1320px}
 .page-float-controls button{pointer-events:auto;width:48px;height:48px;padding:0;border-radius:50%;font-size:1.35rem;box-shadow:0 5px 18px #0003;display:none}
 .page-float-controls button.is-visible{display:flex}
 @media(max-width:760px){#submit{width:100%;max-width:100%;margin-left:auto;margin-right:auto}.page-float-controls{right:12px;bottom:18px}.page-float-controls button{width:44px;height:44px}}
+
+/* Fixed, non-editable Registration ID prefix */
+.registration-id-input{display:flex;align-items:stretch;width:100%;border:1px solid #d9d9d9;border-radius:12px;background:#fff;overflow:hidden}
+.registration-id-prefix{display:flex;align-items:center;padding:0 0 0 18px;color:#321a16;font-weight:800;white-space:nowrap;letter-spacing:.02em}
+.registration-id-input input{flex:1;min-width:0;border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important}
+.registration-id-input:focus-within{outline:3px solid #0b79501c;border-color:#07583a}
 </style>
 <script>
 (function(){try{const u=new URL(window.location.href);if(u.searchParams.get("utm_source")==="chatgpt.com"){u.searchParams.delete("utm_source");window.history.replaceState({},document.title,u.pathname+u.search+u.hash);}}catch(e){}})();
@@ -349,7 +355,7 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 <h2>Check Registration Status · രജിസ്ട്രേഷൻ നില പരിശോധിക്കുക</h2>
 <p class="form-lead">Enter your 6-digit Registration ID. Only registration confirmation status will be displayed.</p>
 <form id="statusLookupForm"><div class="form-grid">
-<div class="full"><label for="lookupRegistrationId">Registration ID | രജിസ്ട്രേഷൻ ഐഡി</label><input id="lookupRegistrationId" inputmode="numeric" autocomplete="off" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="Enter your 6-digit Registration ID" required><span class="field-note">Enter the six digits only. The CRL26- prefix is added automatically.</span></div>
+<div class="full"><label for="lookupRegistrationId">Registration ID | രജിസ്ട്രേഷൻ ഐഡി</label><div class="registration-id-input"><span class="registration-id-prefix" aria-hidden="true">CRL26-</span><input id="lookupRegistrationId" type="text" inputmode="numeric" autocomplete="off" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="000000" aria-label="Enter the six digits after CRL26-" required></div><span class="field-note">CRL26- is fixed. Type only the 6 digits after the prefix.</span></div>
 <div class="full"><button id="lookupSubmit" type="submit">Check Status · പരിശോധിക്കുക</button><div id="lookupStatus" class="status" role="status" aria-live="polite"></div></div>
 </div></form></section>
 <section id="registration" class="form-section reveal"><h2>Official Registration · ഔദ്യോഗിക രജിസ്ട്രേഷൻ</h2><p class="form-lead">Please complete the required details. · ആവശ്യമായ വിവരങ്ങൾ പൂരിപ്പിക്കുക.</p>
