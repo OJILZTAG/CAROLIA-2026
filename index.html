@@ -186,7 +186,16 @@ main{max-width:1320px}
 .brand-wordmark strong{font-family:"Playfair Display",serif;font-size:clamp(2.8rem,10vw,6.4rem);font-weight:800;letter-spacing:.045em;line-height:1.08}
 .brand-wordmark em{font-style:normal;color:#f6cc68}.brand-stars{color:#f6cc68;font-size:clamp(1rem,3vw,1.8rem);letter-spacing:.45em}.brand-subtitle{font-weight:900;letter-spacing:.16em;color:#ffe8a2;font-size:clamp(.68rem,2vw,1rem);line-height:1.6;text-align:center}
 .singer-art{display:grid;place-items:center;position:relative;width:150px;height:150px;margin:auto;border:3px solid var(--gold);border-radius:22px;background:linear-gradient(145deg,#fff2cb,#f3d98d);font-size:4.5rem;box-shadow:var(--shadow)}.singer-art span{font-size:2rem;position:absolute;right:10px;bottom:10px}
-</style>
+/* Final usability polish: centered registration action and compact floating page controls */
+#form .form-grid>.full:has(#submit){display:flex;flex-direction:column;align-items:center;text-align:center}
+#form #submit{display:flex;width:min(100%,340px);min-height:54px;margin:12px auto 0;justify-content:center;text-align:center}
+#form #status{width:100%;text-align:center}
+#statusLookupForm .form-grid>.full:has(#lookupSubmit){display:flex;flex-direction:column;align-items:center}
+#lookupSubmit{width:min(100%,300px);margin:10px auto 0}
+.page-float-controls{position:fixed;right:14px;bottom:18px;z-index:90;display:flex;flex-direction:column;gap:7px}
+.page-float-controls button{width:38px;height:38px;min-width:38px;padding:0;border:1px solid #d7ad55;border-radius:50%;background:#173c32;color:#fff;box-shadow:0 4px 14px #14231e35;font-size:17px;line-height:1}
+.page-float-controls button:hover{transform:translateY(-2px);background:#07533e}
+@media(max-width:600px){.page-float-controls{right:9px;bottom:12px}.page-float-controls button{width:34px;height:34px;min-width:34px;font-size:15px}}</style>
 <script>
 (function(){try{const u=new URL(window.location.href);if(u.searchParams.get("utm_source")==="chatgpt.com"){u.searchParams.delete("utm_source");window.history.replaceState({},document.title,u.pathname+u.search+u.hash);}}catch(e){}})();
 </script>
@@ -371,7 +380,7 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
     </div>
   </div>
 </div>
-<footer><strong>CAROLIA 2026</strong><br>Online Christmas Carol Singing Competition<br>Presented by Mathruvedhi Teams<br><span>Digital Support: OJILZTAG.COM</span></footer>
+<div class="page-float-controls" aria-label="Page navigation"><button type="button" id="scrollTopButton" aria-label="Scroll to top" title="Scroll to top">↑</button><button type="button" id="scrollBottomButton" aria-label="Scroll to bottom" title="Scroll to bottom">↓</button></div><footer><strong>CAROLIA 2026</strong><br>Online Christmas Carol Singing Competition<br>Presented by Mathruvedhi Teams<br><span>Digital Support: OJILZTAG.COM</span></footer>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBvLcC0dY05Q1Ntd9f_KpiQMoLCjId-y14PQTJgoqnY56eFjJpauYg0nCfcoVHpQDdRg/exec";
 const form=document.getElementById("form"),country=document.getElementById("country"),dialCode=document.getElementById("dialCode"),state=document.getElementById("state"),district=document.getElementById("district"),status=document.getElementById("status"),submit=document.getElementById("submit");
@@ -457,6 +466,6 @@ function closeSiteMenu(){siteNav.classList.remove("menu-open");menuToggle.setAtt
 menuToggle.addEventListener("click",()=>{const opened=siteNav.classList.toggle("menu-open");menuToggle.setAttribute("aria-expanded",String(opened));menuToggle.querySelector(".menu-icon").textContent=opened?"✕":"☰";});
 siteNav.addEventListener("click",event=>{if(event.target.closest("a"))closeSiteMenu();});
 window.addEventListener("resize",()=>{if(window.innerWidth>760)closeSiteMenu();});
-document.addEventListener("keydown",event=>{if(event.key==="Escape")closeSiteMenu();});
+document.addEventListener("keydown",event=>{if(event.key==="Escape")closeSiteMenu();});document.getElementById("scrollTopButton").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));document.getElementById("scrollBottomButton").addEventListener("click",()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"}));
 </script>
 </body></html>
