@@ -169,6 +169,17 @@ main{max-width:1320px}
 #siteNav a:hover{background:#f8edcf}#siteNav .admin-nav-link{background:#07583a;color:#fff}
 @media(min-width:761px){.nav-tools{justify-content:flex-end}.menu-toggle{display:none}}
 @media(max-width:760px){.nav-tools{padding:0 16px;margin:0 auto 8px}#siteNav{display:none;width:calc(100% - 32px);max-width:520px;flex-direction:column;align-items:stretch;gap:5px;padding:12px;margin:0 auto 16px}#siteNav.menu-open{display:flex}#siteNav a{display:block;text-align:center;padding:11px 14px;font-size:.92rem}}
+
+/* Final mobile-first refinement */
+#siteNav{position:relative!important;top:auto!important;transform:none!important;opacity:1!important;transition:none!important}
+.nav-tools{position:relative}
+#siteNav.menu-open{box-shadow:0 18px 42px #32100d1b}
+#dialCode{background:#f4f7f3;color:#07583a;font-weight:900;letter-spacing:.04em}
+#country{font-weight:700}
+@media(max-width:760px){.nav-tools{margin-bottom:8px}#siteNav{max-height:min(70vh,560px);overflow-y:auto}.nav-contact{min-width:108px}}
+.confirm-registration{width:min(520px,100%);padding:22px;border:1px solid #e0c779;border-radius:18px;background:#fffdf7;box-shadow:0 20px 55px #32100d24}
+.confirm-registration h3{margin:0 0 10px;color:#6d1020;font-family:"Playfair Display",serif;font-size:1.35rem}
+.confirm-registration p{margin:7px 0;color:#514235}.confirm-registration strong{color:#07583a}
 </style>
 <script>
 (function(){try{const u=new URL(window.location.href);if(u.searchParams.get("utm_source")==="chatgpt.com"){u.searchParams.delete("utm_source");window.history.replaceState({},document.title,u.pathname+u.search+u.hash);}}catch(e){}})();
@@ -274,8 +285,8 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 <div class="presenter">Online Christmas Carol Singing Competition</div>
 <p class="tagline">Sing His Glory, Share His Love</p>
 </header>
-<div class="nav-tools"><button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="siteNav"><span class="menu-icon" aria-hidden="true">☰</span><span>Menu</span></button><a class="nav-contact" href="#contact">Contact ↗</a></div>
-<nav id="siteNav" aria-label="Main navigation"><a href="#about">About</a><a href="#prizes">Prizes</a><a href="#rules">Rules</a><a href="#participate">Join</a><a href="#registration">Register</a><a href="#registration-status">Check Status</a><a href="#organizers">Team</a><a href="#contact">Contact</a><a class="admin-nav-link" href="admin.html">Admin Panel ↗</a></nav>
+<div class="nav-tools"><button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="siteNav"><span class="menu-icon" aria-hidden="true">☰</span><span>Menu</span></button><a class="nav-contact" href="#organizers">Contact ↗</a></div>
+<nav id="siteNav" aria-label="Main navigation"><a href="#about">About</a><a href="#prizes">Prizes</a><a href="#rules">Rules</a><a href="#participate">Join</a><a href="#registration">Register</a><a href="#registration-status">Check Status</a><a href="#organizers">Team</a><a class="admin-nav-link" href="admin.html">Admin Panel ↗</a><a href="#organizers">Contact</a></nav>
 <main>
 <div class="hero"><img class="poster" src="assets/carolia-poster.png" alt="CAROLIA 2026 event poster"><div class="poster-caption">Let the Christmas Spirit Sing! | ക്രിസ്മസ് സന്തോഷം ഗാനങ്ങളിലൂടെ പങ്കുവെക്കാം!</div></div>
 <section id="about" class="reveal"><div class="pair"><div><h2>Welcome to CAROLIA 2026</h2><p>Celebrate the joy of Christmas through the beauty of carol singing. Mathruvedhi Teams welcomes individual participants from India and around the world to share their voice in this online competition.</p></div><div class="ml"><h2>CAROLIA 2026-ലേക്ക് സ്വാഗതം</h2><p>കരോൾ ഗാനങ്ങളിലൂടെ ക്രിസ്മസിന്റെ സന്തോഷം പങ്കുവെക്കാം. ഇന്ത്യയിൽ നിന്നും ലോകത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ നിന്നുമുള്ള വ്യക്തിഗത മത്സരാർത്ഥികളെ Mathruvedhi Teams സ്വാഗതം ചെയ്യുന്നു.</p></div></div></section>
@@ -298,10 +309,10 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 <section id="participate" class="reveal"><h2>How to Participate | എങ്ങനെ പങ്കെടുക്കാം</h2><div class="steps"><div class="step"><div class="num">1</div><b>Register | രജിസ്റ്റർ</b>Complete the form below.<br>ഫോം പൂരിപ്പിക്കുക.</div><div class="step"><div class="num">2</div><b>Prepare | തയ്യാറാകുക</b>Practice and record your carol.<br>കരോൾ പരിശീലിച്ച് റെക്കോർഡ് ചെയ്യുക.</div><div class="step"><div class="num">3</div><b>Submit Video | വീഡിയോ അയയ്ക്കുക</b>Follow organizer instructions.<br>സംഘാടകരുടെ നിർദ്ദേശങ്ങൾ പാലിക്കുക.</div><div class="step"><div class="num">4</div><b>Stay Tuned | അറിയിപ്പുകൾ</b>Watch for updates.<br>പുതിയ അറിയിപ്പുകൾ ശ്രദ്ധിക്കുക.</div></div></section>
 <section id="registration-status" class="reveal">
 <h2>Check Registration Status · രജിസ്ട്രേഷൻ നില പരിശോധിക്കുക</h2>
-<p class="form-lead">Enter your Registration ID or registered mobile number. Only confirmation status will be displayed.</p>
+<p class="form-lead">Enter your 6-digit Registration ID or registered local mobile number. Only confirmation status will be displayed.</p>
 <form id="statusLookupForm"><div class="form-grid">
-<div><label for="lookupRegistrationId">Registration ID</label><input id="lookupRegistrationId" maxlength="30" placeholder="e.g. CRL26-123456"></div>
-<div><label for="lookupPhone">Registered Mobile Number</label><input id="lookupPhone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="15" placeholder="Enter number without country code"><span class="field-note">Enter only the local mobile number. Do not include +country code.</span></div>
+<div><label for="lookupRegistrationId">Registration ID</label><input id="lookupRegistrationId" maxlength="30" placeholder="Enter the 6-digit ID only"></div>
+<div><label for="lookupPhone">Registered Mobile Number</label><input id="lookupPhone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="15" placeholder="Enter local mobile number"><span class="field-note">Enter local digits only. Country code is not needed for status search.</span></div>
 <div class="full"><button id="lookupSubmit" type="submit">Check Status · പരിശോധിക്കുക</button><div id="lookupStatus" class="status" role="status" aria-live="polite"></div></div>
 </div></form></section>
 <section id="registration" class="form-section reveal"><h2>Official Registration · ഔദ്യോഗിക രജിസ്ട്രേഷൻ</h2><p class="form-lead">Please complete the required details. · ആവശ്യമായ വിവരങ്ങൾ പൂരിപ്പിക്കുക.</p>
@@ -309,11 +320,10 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 <div><label for="participantName">Participant Name | പങ്കെടുക്കുന്നയാളുടെ പേര് *</label><input id="participantName" name="participantName" required maxlength="120" autocomplete="name"></div>
 <div><label for="parishName">Your Own Parish Name | സ്വന്തം ഇടവകയുടെ പേര് *</label><input id="parishName" name="parishName" required maxlength="160"><div class="field-help">Enter your own Parish, not the Parish of your current residence.</div></div>
 <div><label for="diocese">Your Own Diocese | സ്വന്തം രൂപതയുടെ പേര് *</label><input id="diocese" name="diocese" required maxlength="160"><div class="field-help">Enter your own Diocese, not the Diocese of your current residence.</div></div>
-<div><label for="country">Current Country of Residence | നിലവിലെ താമസരാജ്യം *</label><select id="country" name="country" required><option value="India">India</option><option value="Other">Outside India</option></select><div class="field-help">Select the country where you currently live and will participate from.</div></div>
-<div id="otherCountryWrap" hidden><label for="otherCountry">Current Country Name | രാജ്യത്തിന്റെ പേര് *</label><input id="otherCountry" name="otherCountry" maxlength="100" placeholder="Enter your current country"></div>
+<div><label for="country">Current Country of Residence | നിലവിലെ താമസരാജ്യം *</label><select id="country" name="country" required></select><div class="field-help">Select your actual country of residence. The international calling code will be set automatically.</div></div>
 <div><label for="state">Current State / Province | സംസ്ഥാനം / പ്രവിശ്യ *</label><input id="state" name="state" required maxlength="100" placeholder="Enter state or province"></div>
 <div><label for="district">Current District / Region | ജില്ല / പ്രദേശം *</label><input id="district" name="district" required maxlength="100" placeholder="Enter district or region"></div>
-<div class="full"><label for="phone">Contact Mobile Number (with WhatsApp) | WhatsApp നമ്പർ *</label><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required minlength="6" maxlength="15" pattern="[0-9]{6,15}" placeholder="Enter mobile number without country code"><span class="field-note">Enter digits only, without +91, +971, +44 or any other country code. രാജ്യത്തിന്റെ കോഡ് ചേർക്കേണ്ടതില്ല.</span></div>
+<div><label for="dialCode">Country Calling Code | രാജ്യത്തിന്റെ കോഡ് *</label><input id="dialCode" name="dialCode" type="text" readonly required aria-readonly="true"><span class="field-note">Automatically selected from your country.</span></div><div><label for="phone">Local Mobile Number (WhatsApp) | മൊബൈൽ നമ്പർ *</label><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required minlength="5" maxlength="15" pattern="[0-9]{5,15}" placeholder="Enter local number only"><span class="field-note">Do not type the country code again. Enter local digits only.</span></div>
 <div class="full"><label>Competition Category | മത്സര വിഭാഗം</label><input id="competitionCategory" name="competitionCategory" value="Individual / Single Category" readonly></div>
 <div class="full check"><input id="rulesAccepted" type="checkbox" required><label for="rulesAccepted">I have read and agree to the competition rules | മത്സര നിബന്ധനകൾ വായിച്ച് അംഗീകരിക്കുന്നു. *</label></div>
 <div class="full"><button id="submit" type="submit">Submit Registration | രജിസ്റ്റർ ചെയ്യുക <span aria-hidden="true">→</span></button><div id="status" class="status" role="status" aria-live="polite"></div></div>
@@ -341,10 +351,16 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 <footer><strong>CAROLIA 2026</strong><br>Online Christmas Carol Singing Competition<br>Presented by Mathruvedhi Teams<br><span>Digital Support: OJILZTAG.COM</span></footer>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQ58PTCTki4I15q7hGl12LZ1DGnt2d9GLCMPvItQwiIUADLn3-RzG8rbcx06etCET6/exec";
-const form=document.getElementById("form"),country=document.getElementById("country"),state=document.getElementById("state"),district=document.getElementById("district"),otherCountry=document.getElementById("otherCountry"),status=document.getElementById("status"),submit=document.getElementById("submit");
+const form=document.getElementById("form"),country=document.getElementById("country"),dialCode=document.getElementById("dialCode"),state=document.getElementById("state"),district=document.getElementById("district"),status=document.getElementById("status"),submit=document.getElementById("submit");
 const successModal=document.getElementById("successModal"),registrationIdEl=document.getElementById("registrationId"),registrationDetails=document.getElementById("registrationDetails"),shareRegistration=document.getElementById("shareRegistration");
 let lastRegistration=null,activeToken=null;
-function updateLocation(){const india=country.value==="India";document.getElementById("otherCountryWrap").hidden=india;otherCountry.required=!india;otherCountry.disabled=india;state.required=true;district.required=true;state.placeholder=india?"Enter your current state":"Enter your current state / province";district.placeholder=india?"Enter your current district":"Enter your current district / region";if(india)otherCountry.value=""}
+const COUNTRY_DIALS=[
+["India","+91"],["United Arab Emirates","+971"],["Saudi Arabia","+966"],["Qatar","+974"],["Kuwait","+965"],["Oman","+968"],["Bahrain","+973"],["United Kingdom","+44"],["United States","+1"],["Canada","+1"],["Australia","+61"],["New Zealand","+64"],["Singapore","+65"],["Malaysia","+60"],["Sri Lanka","+94"],["Pakistan","+92"],["Bangladesh","+880"],["Nepal","+977"],["Maldives","+960"],["Ireland","+353"],["Germany","+49"],["France","+33"],["Italy","+39"],["Spain","+34"],["Portugal","+351"],["Netherlands","+31"],["Belgium","+32"],["Switzerland","+41"],["Austria","+43"],["Sweden","+46"],["Norway","+47"],["Denmark","+45"],["Finland","+358"],["South Africa","+27"],["Nigeria","+234"],["Kenya","+254"],["Uganda","+256"],["Tanzania","+255"],["Ghana","+233"],["Egypt","+20"],["Japan","+81"],["South Korea","+82"],["China","+86"],["Hong Kong","+852"],["Thailand","+66"],["Indonesia","+62"],["Philippines","+63"],["Vietnam","+84"],["Brazil","+55"],["Mexico","+52"],["Argentina","+54"],["Turkey","+90"],["Israel","+972"],["Jordan","+962"],["Lebanon","+961"],["Iraq","+964"],["Iran","+98"],["Russia","+7"],["Ukraine","+380"],["Poland","+48"],["Greece","+30"],["Romania","+40"],["Czechia","+420"],["Hungary","+36"],["Iceland","+354"],["Cyprus","+357"],["Malta","+356"],["Luxembourg","+352"],["Afghanistan","+93"],["Algeria","+213"],["Angola","+244"],["Armenia","+374"],["Azerbaijan","+994"],["Bhutan","+975"],["Brunei","+673"],["Cambodia","+855"],["Chile","+56"],["Colombia","+57"],["Costa Rica","+506"],["Ethiopia","+251"],["Fiji","+679"],["Georgia","+995"],["Jamaica","+1"],["Kazakhstan","+7"],["Mauritius","+230"],["Morocco","+212"],["Myanmar","+95"],["Panama","+507"],["Peru","+51"],["Seychelles","+248"],["Sudan","+249"],["Taiwan","+886"],["Uzbekistan","+998"],["Zimbabwe","+263"]
+];
+COUNTRY_DIALS.sort((a,b)=>a[0].localeCompare(b[0]));
+COUNTRY_DIALS.forEach(([name,code])=>{const option=document.createElement("option");option.value=name;option.textContent=name;country.appendChild(option);});
+country.value="India";
+function updateLocation(){const india=country.value==="India";dialCode.value=COUNTRY_DIALS.find(x=>x[0]===country.value)?.[1]||"";state.required=true;district.required=true;state.placeholder=india?"Enter your current state":"Enter your current state / province";district.placeholder=india?"Enter your current district":"Enter your current district / region";}
 country.addEventListener("change",updateLocation);updateLocation();
 [document.getElementById("phone"),document.getElementById("lookupPhone")].forEach(input=>input.addEventListener("input",()=>{input.value=input.value.replace(/\D/g,"").slice(0,15);}));
 function showSuccess(result){const registeredAt=new Date();lastRegistration={...result,registeredAt:registeredAt};registrationIdEl.textContent=result.registrationId;const registeredAtText=new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeStyle:'short'}).format(registeredAt);document.getElementById('registrationCreatedAt').textContent=registeredAtText;const rows=[['Registered On',registeredAtText],['Participant',result.details.participantName],['Parish',result.details.parishName],['Diocese',result.details.diocese],['Residence',`${result.details.country}, ${result.details.state}, ${result.details.district}`],['WhatsApp',result.details.phone],['Category','Individual / Single Category']];registrationDetails.innerHTML=rows.map(([k,v])=>`<dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v||'—')}</dd>`).join('');successModal.classList.add('open');document.body.style.overflow='hidden';}
@@ -362,7 +378,8 @@ const lookupStatus=document.getElementById("lookupStatus");
 const lookupSubmit=document.getElementById("lookupSubmit");
 statusLookupForm.addEventListener("submit",e=>{
   e.preventDefault();
-  const registrationId=document.getElementById("lookupRegistrationId").value.trim();
+  let registrationId=document.getElementById("lookupRegistrationId").value.trim();
+  if(/^\d{6}$/.test(registrationId))registrationId="CRL26-"+registrationId;
   const phone=document.getElementById("lookupPhone").value.replace(/\D/g,"");
   if(!registrationId&&!phone){lookupStatus.className="status error";lookupStatus.textContent="Enter your Registration ID or mobile number.";return;}
   lookupSubmit.disabled=true;lookupStatus.className="status";lookupStatus.textContent="Checking...";
@@ -378,7 +395,8 @@ statusLookupForm.addEventListener("submit",e=>{
 });
 
 form.addEventListener("submit",e=>{e.preventDefault();status.className="status";if(SCRIPT_URL.startsWith("PASTE_")){status.className="status error";status.textContent="The registration form is not connected yet. Please contact the organizers.";return}
-const details={participantName:form.participantName.value.trim(),parishName:form.parishName.value.trim(),diocese:form.diocese.value.trim(),country:country.value==="India"?"India":otherCountry.value.trim(),state:state.value.trim(),district:district.value.trim(),phone:form.phone.value.replace(/\D/g,""),competitionCategory:"Individual / Single Category",rulesAccepted:document.getElementById("rulesAccepted").checked};
+const localPhone=form.phone.value.replace(/\D/g,"");const callingCode=dialCode.value.trim();if(!country.value||!callingCode||!/^\+[1-9]\d{0,3}$/.test(callingCode)){status.className="status error";status.textContent="Select a valid country and country calling code before submitting.";return;}if(localPhone.length<5||localPhone.length>15){status.className="status error";status.textContent="Enter a valid local mobile number.";return;}const details={participantName:form.participantName.value.trim(),parishName:form.parishName.value.trim(),diocese:form.diocese.value.trim(),country:country.value,state:state.value.trim(),district:district.value.trim(),phone:callingCode+localPhone,countryCode:callingCode,localPhone:localPhone,competitionCategory:"Individual / Single Category",rulesAccepted:document.getElementById("rulesAccepted").checked};
+if(!window.confirm("Please confirm your registration details:\n\nCountry: "+details.country+"\nCountry calling code: "+callingCode+"\nLocal mobile: "+localPhone+"\nFull WhatsApp number: "+details.phone+"\n\nIs this correct?")){status.className="status error";status.textContent="Please verify your country and mobile number, then submit again.";return;}
 const token=crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);activeToken=token;details.clientToken=token;
 submit.disabled=true;submit.textContent="Submitting...";
 // Submit through a hidden iframe so Apps Script can return the generated ID cross-origin.
