@@ -180,6 +180,12 @@ main{max-width:1320px}
 .confirm-registration{width:min(520px,100%);padding:22px;border:1px solid #e0c779;border-radius:18px;background:#fffdf7;box-shadow:0 20px 55px #32100d24}
 .confirm-registration h3{margin:0 0 10px;color:#6d1020;font-family:"Playfair Display",serif;font-size:1.35rem}
 .confirm-registration p{margin:7px 0;color:#514235}.confirm-registration strong{color:#07583a}
+
+/* Self-contained CAROLIA wordmark: avoids missing image assets */
+.brand-wordmark{display:flex;flex-direction:column;align-items:center;gap:5px;width:min(720px,96%);margin:0 auto 10px;padding:8px 10px;color:#fff8e6;text-shadow:0 4px 18px #12000088;animation:floatIn .9s ease-out both}
+.brand-wordmark strong{font-family:"Playfair Display",serif;font-size:clamp(2.8rem,10vw,6.4rem);font-weight:800;letter-spacing:.045em;line-height:1.08}
+.brand-wordmark em{font-style:normal;color:#f6cc68}.brand-stars{color:#f6cc68;font-size:clamp(1rem,3vw,1.8rem);letter-spacing:.45em}.brand-subtitle{font-weight:900;letter-spacing:.16em;color:#ffe8a2;font-size:clamp(.68rem,2vw,1rem);line-height:1.6;text-align:center}
+.singer-art{display:grid;place-items:center;position:relative;width:150px;height:150px;margin:auto;border:3px solid var(--gold);border-radius:22px;background:linear-gradient(145deg,#fff2cb,#f3d98d);font-size:4.5rem;box-shadow:var(--shadow)}.singer-art span{font-size:2rem;position:absolute;right:10px;bottom:10px}
 </style>
 <script>
 (function(){try{const u=new URL(window.location.href);if(u.searchParams.get("utm_source")==="chatgpt.com"){u.searchParams.delete("utm_source");window.history.replaceState({},document.title,u.pathname+u.search+u.hash);}}catch(e){}})();
@@ -281,7 +287,7 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
   <span class="topline-event">✦ CAROLIA 2026 ✦</span>
 </div>
 <header>
-<img class="brand" src="assets/carolia-logo.png" alt="CAROLIA 2026 Online Christmas Carol Singing Competition">
+<div class="brand-wordmark" role="img" aria-label="CAROLIA 2026 Online Christmas Carol Singing Competition"><span class="brand-stars">✦ ❄ ✦</span><strong>CAROLIA <em>2026</em></strong><span class="brand-subtitle">ONLINE CHRISTMAS CAROL SINGING COMPETITION</span></div>
 <div class="presenter">Online Christmas Carol Singing Competition</div>
 <p class="tagline">Sing His Glory, Share His Love</p>
 </header>
@@ -311,7 +317,7 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 <h2>Check Registration Status · രജിസ്ട്രേഷൻ നില പരിശോധിക്കുക</h2>
 <p class="form-lead">Enter your 6-digit Registration ID or registered local mobile number. Only confirmation status will be displayed.</p>
 <form id="statusLookupForm"><div class="form-grid">
-<div><label for="lookupRegistrationId">Registration ID</label><input id="lookupRegistrationId" maxlength="30" placeholder="Enter the 6-digit ID only"></div>
+<div><label for="lookupRegistrationId">Registration ID</label><input id="lookupRegistrationId" inputmode="numeric" autocomplete="off" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="6-digit number only"></div>
 <div><label for="lookupPhone">Registered Mobile Number</label><input id="lookupPhone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="15" placeholder="Enter local mobile number"><span class="field-note">Enter local digits only. Country code is not needed for status search.</span></div>
 <div class="full"><button id="lookupSubmit" type="submit">Check Status · പരിശോധിക്കുക</button><div id="lookupStatus" class="status" role="status" aria-live="polite"></div></div>
 </div></form></section>
@@ -328,7 +334,7 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 <div class="full check"><input id="rulesAccepted" type="checkbox" required><label for="rulesAccepted">I have read and agree to the competition rules | മത്സര നിബന്ധനകൾ വായിച്ച് അംഗീകരിക്കുന്നു. *</label></div>
 <div class="full"><button id="submit" type="submit">Submit Registration | രജിസ്റ്റർ ചെയ്യുക <span aria-hidden="true">→</span></button><div id="status" class="status" role="status" aria-live="polite"></div></div>
 </div></form></section>
-<section id="video" class="reveal"><div class="video-card"><img class="singer" src="assets/carol-singer.png" alt="Carol singer in a festive Christmas setting"><div><h2>Video Submission | വീഡിയോ സമർപ്പണം</h2><p>Video submissions will be collected separately through WhatsApp. Registered participants will receive submission instructions from the organizers.</p><p class="ml">വീഡിയോകൾ WhatsApp വഴി പ്രത്യേകം സ്വീകരിക്കും. രജിസ്റ്റർ ചെയ്തവർക്ക് സംഘാടകർ വീഡിയോ സമർപ്പണ നിർദ്ദേശങ്ങൾ നൽകുന്നതാണ്.</p></div></div></section>
+<section id="video" class="reveal"><div class="video-card"><div class="singer-art" aria-hidden="true">🎄<span>🎶</span>⭐</div><div><h2>Video Submission | വീഡിയോ സമർപ്പണം</h2><p>Video submissions will be collected separately through WhatsApp. Registered participants will receive submission instructions from the organizers.</p><p class="ml">വീഡിയോകൾ WhatsApp വഴി പ്രത്യേകം സ്വീകരിക്കും. രജിസ്റ്റർ ചെയ്തവർക്ക് സംഘാടകർ വീഡിയോ സമർപ്പണ നിർദ്ദേശങ്ങൾ നൽകുന്നതാണ്.</p></div></div></section>
 <section id="organizers" class="reveal organizers-section"><div class="section-kicker">MEET THE TEAM</div><h2>Organizing Committee | സംഘാടകർ</h2><p class="section-lead">A sample layout for coordinators and committee members. Replace demo names and photos with confirmed details.</p><div class="organizer-grid"><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Chief Coordinator</span><h3>Demo Name One</h3><p>Event Coordination</p><a class="organizer-phone" href="tel:+910000000001">☎ Add phone number</a></div></article><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Coordinator</span><h3>Demo Name Two</h3><p>Participant Support</p><a class="organizer-phone" href="tel:+910000000002">☎ Add phone number</a></div></article><article class="organizer-card"><img src="assets/carol-singer.png" alt="Demo organizer portrait"><div><span class="organizer-role">Committee Member</span><h3>Demo Name Three</h3><p>Media & Communications</p><a class="organizer-phone" href="tel:+910000000003">☎ Add phone number</a></div></article></div></section><section id="contact" class="contact reveal contact-notice" aria-label="Organizer contact notice">
 <h2>Organizer Contact | സംഘാടകർ</h2>
 <p class="contact-lead">Registration & video support: contact the organizing team.</p>
