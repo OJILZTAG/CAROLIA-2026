@@ -315,10 +315,9 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 <section id="participate" class="reveal"><h2>How to Participate | എങ്ങനെ പങ്കെടുക്കാം</h2><div class="steps"><div class="step"><div class="num">1</div><b>Register | രജിസ്റ്റർ</b>Complete the form below.<br>ഫോം പൂരിപ്പിക്കുക.</div><div class="step"><div class="num">2</div><b>Prepare | തയ്യാറാകുക</b>Practice and record your carol.<br>കരോൾ പരിശീലിച്ച് റെക്കോർഡ് ചെയ്യുക.</div><div class="step"><div class="num">3</div><b>Submit Video | വീഡിയോ അയയ്ക്കുക</b>Follow organizer instructions.<br>സംഘാടകരുടെ നിർദ്ദേശങ്ങൾ പാലിക്കുക.</div><div class="step"><div class="num">4</div><b>Stay Tuned | അറിയിപ്പുകൾ</b>Watch for updates.<br>പുതിയ അറിയിപ്പുകൾ ശ്രദ്ധിക്കുക.</div></div></section>
 <section id="registration-status" class="reveal">
 <h2>Check Registration Status · രജിസ്ട്രേഷൻ നില പരിശോധിക്കുക</h2>
-<p class="form-lead">Enter your 6-digit Registration ID or registered local mobile number. Only confirmation status will be displayed.</p>
+<p class="form-lead">Enter your 6-digit Registration ID. Only registration confirmation status will be displayed.</p>
 <form id="statusLookupForm"><div class="form-grid">
-<div><label for="lookupRegistrationId">Registration ID</label><input id="lookupRegistrationId" inputmode="numeric" autocomplete="off" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="6-digit number only"></div>
-<div><label for="lookupPhone">Registered Mobile Number</label><input id="lookupPhone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="15" placeholder="Enter local mobile number"><span class="field-note">Enter local digits only. Country code is not needed for status search.</span></div>
+<div class="full"><label for="lookupRegistrationId">Registration ID | രജിസ്ട്രേഷൻ ഐഡി</label><input id="lookupRegistrationId" inputmode="numeric" autocomplete="off" minlength="6" maxlength="6" pattern="[0-9]{6}" placeholder="Enter your 6-digit Registration ID" required><span class="field-note">Enter the six digits only. The CRL26- prefix is added automatically.</span></div>
 <div class="full"><button id="lookupSubmit" type="submit">Check Status · പരിശോധിക്കുക</button><div id="lookupStatus" class="status" role="status" aria-live="polite"></div></div>
 </div></form></section>
 <section id="registration" class="form-section reveal"><h2>Official Registration · ഔദ്യോഗിക രജിസ്ട്രേഷൻ</h2><p class="form-lead">Please complete the required details. · ആവശ്യമായ വിവരങ്ങൾ പൂരിപ്പിക്കുക.</p>
@@ -378,25 +377,29 @@ function registrationShareText(){if(!lastRegistration)return '';const d=lastRegi
 shareRegistration.addEventListener('click',()=>{if(!lastRegistration)return;const text=registrationShareText();const whatsappUrl='https://wa.me/?text='+encodeURIComponent(text);window.open(whatsappUrl,'_blank','noopener,noreferrer');});
 
 
-// Public status lookup – confirmation only; no participant details are exposed.
+// Public status lookup – Registration ID only.
+// No public mobile-number search or personal details are exposed.
 const statusLookupForm=document.getElementById("statusLookupForm");
 const lookupStatus=document.getElementById("lookupStatus");
 const lookupSubmit=document.getElementById("lookupSubmit");
 statusLookupForm.addEventListener("submit",e=>{
   e.preventDefault();
-  let registrationId=document.getElementById("lookupRegistrationId").value.trim();
-  if(/^\d{6}$/.test(registrationId))registrationId="CRL26-"+registrationId;
-  const phone=document.getElementById("lookupPhone").value.replace(/\D/g,"");
-  if(!registrationId&&!phone){lookupStatus.className="status error";lookupStatus.textContent="Enter your Registration ID or mobile number.";return;}
+  const enteredId=document.getElementById("lookupRegistrationId").value.replace(/\D/g,"").trim();
+  if(!/^\d{6}$/.test(enteredId)){
+    lookupStatus.className="status error";
+    lookupStatus.textContent="Enter a valid 6-digit Registration ID.";
+    return;
+  }
+  const registrationId="CRL26-"+enteredId;
   lookupSubmit.disabled=true;lookupStatus.className="status";lookupStatus.textContent="Checking...";
   const token=crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);
   const frame=document.createElement("iframe");frame.name="carolia-lookup-"+token;frame.style.display="none";document.body.appendChild(frame);
   const postForm=document.createElement("form");postForm.method="POST";postForm.action=SCRIPT_URL;postForm.target=frame.name;postForm.style.display="none";
-  const input=document.createElement("input");input.type="hidden";input.name="payload";input.value=JSON.stringify({action:"lookup",registrationId:registrationId,phone:phone,clientToken:token});postForm.appendChild(input);document.body.appendChild(postForm);
+  const input=document.createElement("input");input.type="hidden";input.name="payload";input.value=JSON.stringify({action:"lookup",registrationId:registrationId,clientToken:token});postForm.appendChild(input);document.body.appendChild(postForm);
   let finished=false;
   const cleanup=()=>{if(finished)return;finished=true;clearTimeout(timer);window.removeEventListener("message",onMessage);postForm.remove();frame.remove();lookupSubmit.disabled=false;};
   const timer=setTimeout(()=>{cleanup();lookupStatus.className="status error";lookupStatus.textContent="Unable to verify right now. Please try again later.";},25000);
-  function onMessage(event){const data=event.data;if(!data||data.type!=="CAROLIA_STATUS_RESULT"||data.token!==token)return;cleanup();if(data.success&&data.result&&data.result.ambiguous){lookupStatus.className="status error";lookupStatus.textContent="More than one registration matches this number. Please use your Registration ID or contact the organizers.";}else if(data.success&&data.result&&data.result.found){lookupStatus.className="status show";lookupStatus.textContent="✓ Registration Confirmed";}else if(data.success){lookupStatus.className="status error";lookupStatus.textContent="No Registration Found";}else{lookupStatus.className="status error";lookupStatus.textContent=data.error||"Status check failed.";}}
+  function onMessage(event){const data=event.data;if(!data||data.type!=="CAROLIA_STATUS_RESULT"||data.token!==token)return;cleanup();if(data.success&&data.result&&data.result.found){lookupStatus.className="status show";lookupStatus.textContent="✓ Registration Confirmed";}else if(data.success){lookupStatus.className="status error";lookupStatus.textContent="No Registration Found";}else{lookupStatus.className="status error";lookupStatus.textContent=data.error||"Status check failed.";}}
   window.addEventListener("message",onMessage);postForm.submit();
 });
 
