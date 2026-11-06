@@ -362,7 +362,7 @@ statusLookupForm.addEventListener("submit",e=>{
   let finished=false;
   const cleanup=()=>{if(finished)return;finished=true;clearTimeout(timer);window.removeEventListener("message",onMessage);postForm.remove();frame.remove();lookupSubmit.disabled=false;};
   const timer=setTimeout(()=>{cleanup();lookupStatus.className="status error";lookupStatus.textContent="Unable to verify right now. Please try again later.";},25000);
-  function onMessage(event){const data=event.data;if(!data||data.type!=="CAROLIA_STATUS_RESULT"||data.token!==token)return;cleanup();if(data.success&&data.result&&data.result.found){lookupStatus.className="status show";lookupStatus.textContent="✓ Registration Confirmed";}else if(data.success){lookupStatus.className="status error";lookupStatus.textContent="No Registration Found";}else{lookupStatus.className="status error";lookupStatus.textContent=data.error||"Status check failed.";}}
+  function onMessage(event){const data=event.data;if(!data||data.type!=="CAROLIA_STATUS_RESULT"||data.token!==token)return;cleanup();if(data.success&&data.result&&data.result.ambiguous){lookupStatus.className="status error";lookupStatus.textContent="More than one registration matches this number. Please use your Registration ID or contact the organizers.";}else if(data.success&&data.result&&data.result.found){lookupStatus.className="status show";lookupStatus.textContent="✓ Registration Confirmed";}else if(data.success){lookupStatus.className="status error";lookupStatus.textContent="No Registration Found";}else{lookupStatus.className="status error";lookupStatus.textContent=data.error||"Status check failed.";}}
   window.addEventListener("message",onMessage);postForm.submit();
 });
 
