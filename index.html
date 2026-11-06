@@ -195,9 +195,32 @@ main{max-width:1320px}
 .page-float-controls{position:fixed;right:14px;bottom:18px;z-index:90;display:flex;flex-direction:column;gap:7px}
 .page-float-controls button{width:38px;height:38px;min-width:38px;padding:0;border:1px solid #d7ad55;border-radius:50%;background:#173c32;color:#fff;box-shadow:0 4px 14px #14231e35;font-size:17px;line-height:1}
 .page-float-controls button:hover{transform:translateY(-2px);background:#07533e}
-@media(max-width:600px){.page-float-controls{right:9px;bottom:12px}.page-float-controls button{width:34px;height:34px;min-width:34px;font-size:15px}}</style>
+@media(max-width:600px){.page-float-controls{right:9px;bottom:12px}.page-float-controls button{width:34px;height:34px;min-width:34px;font-size:15px}}
+/* CAROLIA 2026 usability corrections */
+#submit{display:flex;width:min(100%,460px);margin:22px auto 0;justify-content:center;align-items:center;text-align:center}
+.page-float-controls{position:fixed;right:16px;bottom:22px;z-index:80;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.page-float-controls button{pointer-events:auto;width:48px;height:48px;padding:0;border-radius:50%;font-size:1.35rem;box-shadow:0 5px 18px #0003;display:none}
+.page-float-controls button.is-visible{display:flex}
+@media(max-width:760px){#submit{width:100%;max-width:100%;margin-left:auto;margin-right:auto}.page-float-controls{right:12px;bottom:18px}.page-float-controls button{width:44px;height:44px}}
+</style>
 <script>
 (function(){try{const u=new URL(window.location.href);if(u.searchParams.get("utm_source")==="chatgpt.com"){u.searchParams.delete("utm_source");window.history.replaceState({},document.title,u.pathname+u.search+u.hash);}}catch(e){}})();
+
+/* Directional scroll controls: show only the action relevant to current position. */
+(()=>{
+ const up=document.getElementById("scrollTopButton");
+ const down=document.getElementById("scrollBottomButton");
+ if(!up||!down)return;
+ const update=()=>{
+   const max=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+   const y=window.scrollY||document.documentElement.scrollTop;
+   up.classList.toggle("is-visible",y>120);
+   down.classList.toggle("is-visible",max-y>160);
+ };
+ window.addEventListener("scroll",update,{passive:true});
+ window.addEventListener("resize",update);
+ update();
+})();
 </script>
 <style>
 /* Organizer section: roomier layout, smaller portraits */
@@ -334,10 +357,10 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 <div><label for="participantName">Participant Name | പങ്കെടുക്കുന്നയാളുടെ പേര് *</label><input id="participantName" name="participantName" required maxlength="120" autocomplete="name"></div>
 <div><label for="parishName">Your Own Parish Name | സ്വന്തം ഇടവകയുടെ പേര് *</label><input id="parishName" name="parishName" required maxlength="160"><div class="field-help">Enter your own Parish, not the Parish of your current residence.</div></div>
 <div><label for="diocese">Your Own Diocese | സ്വന്തം രൂപതയുടെ പേര് *</label><input id="diocese" name="diocese" required maxlength="160"><div class="field-help">Enter your own Diocese, not the Diocese of your current residence.</div></div>
-<div><label for="country">Current Country of Residence | നിലവിലെ താമസരാജ്യം *</label><select id="country" name="country" required></select><div class="field-help">Select your actual country of residence. The international calling code will be set automatically.</div></div>
+<div><label for="country">Current Country of Residence | നിലവിലെ താമസരാജ്യം *</label><input id="country" name="country" type="text" required maxlength="100" autocomplete="country-name" placeholder="Type your country name"><div class="field-help">Type your country of residence. Example: India.</div></div>
 <div><label for="state">Current State / Province | സംസ്ഥാനം / പ്രവിശ്യ *</label><input id="state" name="state" required maxlength="100" placeholder="Enter state or province"></div>
 <div><label for="district">Current District / Region | ജില്ല / പ്രദേശം *</label><input id="district" name="district" required maxlength="100" placeholder="Enter district or region"></div>
-<div><label for="dialCode">Country Calling Code | രാജ്യത്തിന്റെ കോഡ് *</label><input id="dialCode" name="dialCode" type="text" readonly required aria-readonly="true"><span class="field-note">Automatically selected from your country.</span></div><div><label for="phone">Local Mobile Number (WhatsApp) | മൊബൈൽ നമ്പർ *</label><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required minlength="5" maxlength="15" pattern="[0-9]{5,15}" placeholder="Enter local number only"><span class="field-note">Do not type the country code again. Enter local digits only.</span></div>
+<div><label for="dialCode">Country Calling Code | രാജ്യത്തിന്റെ കോഡ് *</label><input id="dialCode" name="dialCode" type="text" inputmode="tel" required maxlength="5" placeholder="+91"><span class="field-note">Auto-fills for common countries. You can edit the calling code if needed.</span></div><div><label for="phone">Local Mobile Number (WhatsApp) | മൊബൈൽ നമ്പർ *</label><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required minlength="5" maxlength="15" pattern="[0-9]{5,15}" placeholder="Enter local number only"><span class="field-note">Do not type the country code again. Enter local digits only.</span></div>
 <div class="full"><label>Competition Category | മത്സര വിഭാഗം</label><input id="competitionCategory" name="competitionCategory" value="Individual / Single Category" readonly></div>
 <div class="full check"><input id="rulesAccepted" type="checkbox" required><label for="rulesAccepted">I have read and agree to the competition rules | മത്സര നിബന്ധനകൾ വായിച്ച് അംഗീകരിക്കുന്നു. *</label></div>
 <div class="full"><button id="submit" type="submit">Submit Registration | രജിസ്റ്റർ ചെയ്യുക <span aria-hidden="true">→</span></button><div id="status" class="status" role="status" aria-live="polite"></div></div>
@@ -375,7 +398,7 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
     <dl id="registrationDetails" class="detail-list"></dl>
     <div class="modal-actions">
       <button id="shareRegistration" class="share-button" type="button">Share on WhatsApp · WhatsApp വഴി പങ്കിടുക ↗</button>
-      <a class="registration-link-button" href="https://ojilztag.github.io/carolia-2026/#registration-status" target="_blank" rel="noopener">Registration Website & Status Link ↗</a>
+      <a class="registration-link-button" href="https://carolia.ojilztag.com/#registration-status" target="_blank" rel="noopener">Registration Website & Status Link ↗</a>
       <button id="closeSuccess" class="close-button" type="button">Close · അടയ്ക്കുക</button>
     </div>
   </div>
@@ -407,18 +430,15 @@ phoneConfirmModal.addEventListener("click",e=>{if(e.target===phoneConfirmModal)f
 const COUNTRY_DIALS=[
 ["India","+91"],["United Arab Emirates","+971"],["Saudi Arabia","+966"],["Qatar","+974"],["Kuwait","+965"],["Oman","+968"],["Bahrain","+973"],["United Kingdom","+44"],["United States","+1"],["Canada","+1"],["Australia","+61"],["New Zealand","+64"],["Singapore","+65"],["Malaysia","+60"],["Sri Lanka","+94"],["Pakistan","+92"],["Bangladesh","+880"],["Nepal","+977"],["Maldives","+960"],["Ireland","+353"],["Germany","+49"],["France","+33"],["Italy","+39"],["Spain","+34"],["Portugal","+351"],["Netherlands","+31"],["Belgium","+32"],["Switzerland","+41"],["Austria","+43"],["Sweden","+46"],["Norway","+47"],["Denmark","+45"],["Finland","+358"],["South Africa","+27"],["Nigeria","+234"],["Kenya","+254"],["Uganda","+256"],["Tanzania","+255"],["Ghana","+233"],["Egypt","+20"],["Japan","+81"],["South Korea","+82"],["China","+86"],["Hong Kong","+852"],["Thailand","+66"],["Indonesia","+62"],["Philippines","+63"],["Vietnam","+84"],["Brazil","+55"],["Mexico","+52"],["Argentina","+54"],["Turkey","+90"],["Israel","+972"],["Jordan","+962"],["Lebanon","+961"],["Iraq","+964"],["Iran","+98"],["Russia","+7"],["Ukraine","+380"],["Poland","+48"],["Greece","+30"],["Romania","+40"],["Czechia","+420"],["Hungary","+36"],["Iceland","+354"],["Cyprus","+357"],["Malta","+356"],["Luxembourg","+352"],["Afghanistan","+93"],["Algeria","+213"],["Angola","+244"],["Armenia","+374"],["Azerbaijan","+994"],["Bhutan","+975"],["Brunei","+673"],["Cambodia","+855"],["Chile","+56"],["Colombia","+57"],["Costa Rica","+506"],["Ethiopia","+251"],["Fiji","+679"],["Georgia","+995"],["Jamaica","+1"],["Kazakhstan","+7"],["Mauritius","+230"],["Morocco","+212"],["Myanmar","+95"],["Panama","+507"],["Peru","+51"],["Seychelles","+248"],["Sudan","+249"],["Taiwan","+886"],["Uzbekistan","+998"],["Zimbabwe","+263"]
 ];
-COUNTRY_DIALS.sort((a,b)=>a[0].localeCompare(b[0]));
-COUNTRY_DIALS.forEach(([name,code])=>{const option=document.createElement("option");option.value=name;option.textContent=name;country.appendChild(option);});
-country.value="India";
-function updateLocation(){const india=country.value==="India";dialCode.value=COUNTRY_DIALS.find(x=>x[0]===country.value)?.[1]||"";state.required=true;district.required=true;state.placeholder=india?"Enter your current state":"Enter your current state / province";district.placeholder=india?"Enter your current district":"Enter your current district / region";}
-country.addEventListener("change",updateLocation);updateLocation();
+function updateLocation(){const typed=country.value.trim().toLowerCase();const match=COUNTRY_DIALS.find(x=>x[0].toLowerCase()===typed);if(match)dialCode.value=match[1];const india=typed==="india";state.required=true;district.required=true;state.placeholder=india?"Enter your current state":"Enter your current state / province";district.placeholder=india?"Enter your current district":"Enter your current district / region";}
+country.value="India";country.addEventListener("input",updateLocation);country.addEventListener("change",updateLocation);updateLocation();
 [document.getElementById("phone"),document.getElementById("lookupPhone")].filter(Boolean).forEach(input=>input.addEventListener("input",()=>{input.value=input.value.replace(/\D/g,"").slice(0,15);}));
 function showSuccess(result){const registeredAt=new Date();lastRegistration={...result,registeredAt:registeredAt};registrationIdEl.textContent=result.registrationId;const registeredAtText=new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeStyle:'short'}).format(registeredAt);document.getElementById('registrationCreatedAt').textContent=registeredAtText;const rows=[['Registered On',registeredAtText],['Participant',result.details.participantName],['Parish',result.details.parishName],['Diocese',result.details.diocese],['Residence',`${result.details.country}, ${result.details.state}, ${result.details.district}`],['WhatsApp',result.details.phone],['Category','Individual / Single Category']];registrationDetails.innerHTML=rows.map(([k,v])=>`<dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v||'—')}</dd>`).join('');successModal.classList.add('open');document.body.style.overflow='hidden';}
 function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function closeSuccess(){successModal.classList.remove('open');document.body.style.overflow='';}
 document.getElementById('closeSuccess').addEventListener('click',closeSuccess);
 successModal.addEventListener('click',e=>{if(e.target===successModal)closeSuccess()});
-function registrationShareText(){if(!lastRegistration)return '';const d=lastRegistration.details;const registeredAtText=new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeStyle:'short'}).format(lastRegistration.registeredAt);return `🎄 CAROLIA 2026 – REGISTRATION SUCCESSFUL!\n\nRegistration ID: ${lastRegistration.registrationId}\nRegistered On: ${registeredAtText}\nParticipant: ${d.participantName}\nParish: ${d.parishName}\nDiocese: ${d.diocese}\nResidence: ${d.country}, ${d.state}, ${d.district}\nWhatsApp: ${d.phone}\nCategory: Individual / Single Category\n\n🌐 Registration Website:\nhttps://ojilztag.github.io/carolia-2026/\n\n🔎 Check Registration Status:\nhttps://ojilztag.github.io/carolia-2026/#registration-status\n\nPlease save your Registration ID and use the website link above for future updates.`;}
+function registrationShareText(){if(!lastRegistration)return '';const d=lastRegistration.details;const registeredAtText=new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeStyle:'short'}).format(lastRegistration.registeredAt);return `🎄 CAROLIA 2026 – REGISTRATION SUCCESSFUL!\n\nRegistration ID: ${lastRegistration.registrationId}\nRegistered On: ${registeredAtText}\nParticipant: ${d.participantName}\nParish: ${d.parishName}\nDiocese: ${d.diocese}\nResidence: ${d.country}, ${d.state}, ${d.district}\nWhatsApp: ${d.phone}\nCategory: Individual / Single Category\n\n🌐 Registration Website:\nhttps://carolia.ojilztag.com/\n\n🔎 Check Registration Status:\nhttps://carolia.ojilztag.com/#registration-status\n\nPlease save your Registration ID and use the website link above for future updates.`;}
 shareRegistration.addEventListener('click',()=>{if(!lastRegistration)return;const text=registrationShareText();const whatsappUrl='https://wa.me/?text='+encodeURIComponent(text);window.open(whatsappUrl,'_blank','noopener,noreferrer');});
 
 
