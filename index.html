@@ -333,6 +333,35 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 </header>
 <div class="nav-tools"><button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="siteNav"><span class="menu-icon" aria-hidden="true">☰</span><span>Menu</span></button><a class="nav-contact" href="admin.html">Admin ↗</a></div>
 <nav id="siteNav" aria-label="Main navigation"><a href="#about">About</a><a href="#prizes">Prizes</a><a href="#rules">Rules</a><a href="#participate">Join</a><a href="#registration">Register</a><a href="#registration-status">Check Status</a><a href="#organizers">Team</a><a href="notices.html">Notices</a><a href="#organizers">Contact</a></nav>
+<style>
+.notice-highlight{max-width:1180px;margin:14px auto 22px;padding:0 18px}
+.notice-highlight-inner{display:flex;align-items:center;gap:0;min-height:52px;overflow:hidden;border:1px solid #dfbd61;border-radius:13px;background:linear-gradient(100deg,#fff0c2,#fffaf0);box-shadow:0 8px 22px #39120d12}
+.notice-highlight-label{align-self:stretch;display:flex;align-items:center;gap:8px;padding:0 17px;background:linear-gradient(120deg,#6d1020,#941d2b);color:#fff5d9;font-weight:900;font-size:.82rem;letter-spacing:.04em;white-space:nowrap}
+.notice-highlight-window{min-width:0;flex:1;overflow:hidden;padding:0 14px}
+.notice-highlight-track{display:flex;width:max-content;gap:42px;white-space:nowrap;animation:noticeHighlightScroll 26s linear infinite}
+.notice-highlight-inner:hover .notice-highlight-track,.notice-highlight-inner:focus-within .notice-highlight-track{animation-play-state:paused}
+.notice-highlight-track a{display:inline-flex;align-items:center;gap:9px;color:#5b1720;text-decoration:none;font-weight:800;font-size:.9rem;padding:14px 0}
+.notice-highlight-track a:before{content:"●";color:#b17b18;font-size:.7rem}
+.notice-highlight-link{padding:0 15px;color:#07583a;font-size:.82rem;font-weight:900;text-decoration:none;white-space:nowrap}
+@keyframes noticeHighlightScroll{to{transform:translateX(-50%)}}
+@media(max-width:600px){.notice-highlight{padding:0 12px;margin:10px auto 16px}.notice-highlight-label{padding:0 10px;font-size:.72rem}.notice-highlight-link{padding:0 10px;font-size:.74rem}.notice-highlight-track a{font-size:.82rem}}
+@media(prefers-reduced-motion:reduce){.notice-highlight-track{animation:none;white-space:normal;flex-wrap:wrap}}
+</style>
+<div class="notice-highlight" aria-label="Latest notices">
+  <div class="notice-highlight-inner">
+    <div class="notice-highlight-label">📢 LATEST NOTICES</div>
+    <div class="notice-highlight-window"><div class="notice-highlight-track" id="noticeHighlightTrack">
+      <a href="notices.html">DEMO NOTICE 01 — Programme Announcement</a>
+      <a href="notices.html">DEMO NOTICE 02 — Registration Information</a>
+      <a href="notices.html">DEMO NOTICE 03 — Important Update</a>
+      <a href="notices.html" aria-hidden="true">DEMO NOTICE 01 — Programme Announcement</a>
+      <a href="notices.html" aria-hidden="true">DEMO NOTICE 02 — Registration Information</a>
+      <a href="notices.html" aria-hidden="true">DEMO NOTICE 03 — Important Update</a>
+    </div></div>
+    <a class="notice-highlight-link" href="notices.html">View All →</a>
+  </div>
+</div>
+
 <main>
 <div class="hero"><img class="poster" src="assets/carolia-poster.png" alt="CAROLIA 2026 event poster"><div class="poster-caption">Let the Christmas Spirit Sing! | ക്രിസ്മസ് സന്തോഷം ഗാനങ്ങളിലൂടെ പങ്കുവെക്കാം!</div></div>
 <section id="about" class="reveal"><div class="pair"><div><h2>Welcome to CAROLIA 2026</h2><p>Celebrate the joy of Christmas through the beauty of carol singing. Mathruvedhi Teams welcomes individual participants from India and around the world to share their voice in this online competition.</p></div><div class="ml"><h2>CAROLIA 2026-ലേക്ക് സ്വാഗതം</h2><p>കരോൾ ഗാനങ്ങളിലൂടെ ക്രിസ്മസിന്റെ സന്തോഷം പങ്കുവെക്കാം. ഇന്ത്യയിൽ നിന്നും ലോകത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ നിന്നുമുള്ള വ്യക്തിഗത മത്സരാർത്ഥികളെ Mathruvedhi Teams സ്വാഗതം ചെയ്യുന്നു.</p></div></div></section>
