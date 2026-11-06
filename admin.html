@@ -50,7 +50,14 @@ main{max-width:1050px;margin:30px auto 60px}
 input{border-radius:11px}.record{border-color:#e7dcc5;border-radius:14px;box-shadow:0 5px 18px #39120d08}.record h3{font-size:1rem}
 .footer-home{text-align:center;margin:26px 0}.footer-home a{color:#6d1020;font-weight:800}#loginPanel{max-width:560px;margin:22px auto}#loginPanel button{min-width:140px}
 @media(max-width:650px){.admin-header{align-items:flex-start;flex-direction:column;padding:20px}.home-button{width:100%}.admin-intro{align-items:flex-start;flex-direction:column}.admin-nav{display:grid;grid-template-columns:1fr 1fr}.admin-nav a:last-child{margin:0}.metrics{grid-template-columns:1fr}.toolbar{align-items:flex-start}.toolbar-actions{width:100%}.toolbar-actions button{flex:1}}
-</style>
+/* Admin final refinement: single Home link and balanced controls */
+.admin-nav a:last-child{margin-left:0}
+#loginForm{text-align:center}
+#loginForm label,#loginForm input{text-align:left}
+#loginForm button{display:flex;min-width:180px;margin:18px auto 0;justify-content:center}
+#searchForm .full:last-child,#passwordForm .full:last-child{display:flex;flex-direction:column;align-items:center}
+#searchButton,#passwordButton{min-width:220px}
+#loginStatus{text-align:center}</style>
 </head>
 <body>
 <header class="admin-header"><div class="admin-brand"><span class="admin-mark">✦</span><div><h1>CAROLIA 2026</h1><p>Administration Portal · Mathruvedhi Teams</p></div></div><a class="home-button" href="index.html">← Back to Home</a></header>
@@ -68,7 +75,7 @@ input{border-radius:11px}.record{border-color:#e7dcc5;border-radius:14px;box-sha
 </section>
 
 <div id="dashboard" hidden>
-<nav class="admin-nav" aria-label="Admin sections"><a href="#overview">Overview</a><a href="#participantSearch">Search Participants</a><a href="#recent">Recent Records</a><a href="#account">Account Settings</a><a href="index.html">Home ↗</a></nav>
+<nav class="admin-nav" aria-label="Admin sections"><a href="#overview">Overview</a><a href="#participantSearch">Search Participants</a><a href="#recent">Recent Records</a><a href="#account">Account Settings</a></nav>
 <section class="panel" id="overview">
 <div class="toolbar"><div><h2>Dashboard Overview</h2><div class="small" id="welcome"></div></div><div class="toolbar-actions"><button id="refreshButton" class="secondary" type="button">↻ Refresh</button><button id="logoutButton" class="danger" type="button">Logout ↗</button></div></div>
 <div class="metrics"><div class="metric"><span>Total Registrations</span><strong id="totalCount">—</strong></div><div class="metric"><span>Recent Records Displayed</span><strong id="recentCount">—</strong></div></div>
@@ -101,7 +108,7 @@ input{border-radius:11px}.record{border-color:#e7dcc5;border-radius:14px;box-sha
 </form>
 </section>
 </div>
-<p class="small footer-home"><a href="index.html">← Return to CAROLIA 2026 Website</a></p>
+
 </main>
 <script>
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbyBvLcC0dY05Q1Ntd9f_KpiQMoLCjId-y14PQTJgoqnY56eFjJpauYg0nCfcoVHpQDdRg/exec";
