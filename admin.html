@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#6d1020">
+<title>CAROLIA 2026 | Admin Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--wine:#6d1020;--green:#07583a;--gold:#e7bd58;--cream:#fff9ef;--ink:#241811;--muted:#766456;--line:#ead9b4}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#fffaf1,#f5e6c9);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,#27060b,#76121d 60%,#a52b20);color:#fff;text-align:center;padding:28px 16px;border-bottom:4px solid var(--gold)}
+header h1{font:700 clamp(1.5rem,4vw,2.2rem) "Playfair Display",serif;margin:0}header p{margin:6px 0 0;color:#ffe8a2}
+main{width:min(1050px,calc(100% - 28px));margin:26px auto 60px}
+.panel{background:#fffdf7;border:1px solid var(--line);border-radius:18px;padding:clamp(18px,3vw,28px);margin:18px 0;box-shadow:0 12px 35px #39120d12}
+h2{color:var(--wine);font:700 1.45rem "Playfair Display",serif;margin:0 0 14px}
+label{display:block;font-weight:800;margin:12px 0 6px}
+input{width:100%;padding:13px 14px;border:1px solid #d6c49a;border-radius:10px;font:inherit;background:white}
+input:focus{outline:3px solid #0b79501c;border-color:var(--green)}
+button,.button{border:0;border-radius:10px;padding:12px 18px;background:var(--green);color:white;font:800  .95rem "DM Sans",sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;margin-top:14px}
+button:disabled{opacity:.55;cursor:wait}.secondary{background:#695345}.danger{background:#8c2118}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.full{grid-column:1/-1}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.metric{background:#fff4d6;border:1px solid #e8c76c;border-radius:14px;padding:18px}
+.metric span{display:block;color:var(--muted);font-weight:700}.metric strong{font-size:2rem;color:var(--green)}
+.status{display:none;padding:12px 14px;border-radius:10px;margin-top:12px;font-weight:700;overflow-wrap:anywhere}.status.show{display:block;background:#e8f6eb;color:#14552d}.status.error{display:block;background:#ffebe7;color:#8c2118}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:760px}th,td{text-align:left;padding:10px;border-bottom:1px solid #eadfca;vertical-align:top}th{background:#fff4d6;color:var(--wine)}td{font-size:.9rem}
+.record{border:1px solid #e7d9bd;border-radius:12px;padding:14px;margin:12px 0;background:#fff}
+.record h3{margin:0 0 10px;color:var(--green)}.record dl{display:grid;grid-template-columns:170px 1fr;gap:5px 12px;margin:0}.record dt{font-weight:800;color:var(--muted)}.record dd{margin:0;overflow-wrap:anywhere}
+.small{font-size:.86rem;color:var(--muted)}[hidden]{display:none!important}
+@media(max-width:650px){.grid,.metrics{grid-template-columns:1fr}.full{grid-column:auto}.record dl{grid-template-columns:1fr;gap:1px}.record dd{margin-bottom:8px}}
+</style>
+</head>
+<body>
+<header><h1>CAROLIA 2026 · Admin Dashboard</h1><p>Mathruvedhi Teams | Authorized Admin Access Only</p></header>
+<main>
+<section id="loginPanel" class="panel">
+<h2>Admin Login</h2>
+<p class="small">Sign in using the permanent Admin username and your private password.</p>
+<form id="loginForm">
+<label for="username">Username</label><input id="username" autocomplete="username" value="Admin" required>
+<label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required>
+<button id="loginButton" type="submit">Login</button>
+<div id="loginStatus" class="status" role="status" aria-live="polite"></div>
+</form>
+</section>
+
+<div id="dashboard" hidden>
+<section class="panel">
+<div class="toolbar"><div><h2>Dashboard Overview</h2><div class="small" id="welcome"></div></div><button id="logoutButton" class="danger" type="button">Logout</button></div>
+<div class="metrics"><div class="metric"><span>Total Registrations</span><strong id="totalCount">—</strong></div><div class="metric"><span>Recent Records Displayed</span><strong id="recentCount">—</strong></div></div>
+<div id="dashboardStatus" class="status" role="status"></div>
+</section>
+
+<section class="panel">
+<h2>Search Participants</h2>
+<form id="searchForm" class="grid">
+<div class="full"><label for="searchQuery">Registration ID, Name, Mobile, Parish, Diocese, Country, State or District</label><input id="searchQuery" placeholder="Enter search term" required></div>
+<div class="full"><button id="searchButton" type="submit">Search Records</button></div>
+</form>
+<div id="searchStatus" class="status" role="status" aria-live="polite"></div>
+<div id="searchResults"></div>
+</section>
+
+<section class="panel">
+<h2>Recent Registrations</h2>
+<div id="recentRecords"></div>
+</section>
+
+<section class="panel">
+<h2>Change Admin Password</h2>
+<p class="small">Use a unique password of at least 12 characters. After a successful change, you will need to log in again.</p>
+<form id="passwordForm" class="grid">
+<div><label for="currentPassword">Current Password</label><input id="currentPassword" type="password" autocomplete="current-password" required></div>
+<div><label for="newPassword">New Password</label><input id="newPassword" type="password" minlength="12" autocomplete="new-password" required></div>
+<div class="full"><label for="confirmPassword">Confirm New Password</label><input id="confirmPassword" type="password" minlength="12" autocomplete="new-password" required></div>
+<div class="full"><button id="passwordButton" type="submit">Update Password</button><div id="passwordStatus" class="status" role="status" aria-live="polite"></div></div>
+</form>
+</section>
+</div>
+<p class="small"><a href="index.html">← Back to CAROLIA 2026 Website</a></p>
+</main>
+<script>
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbxQ58PTCTki4I15q7hGl12LZ1DGnt2d9GLCMPvItQwiIUADLn3-RzG8rbcx06etCET6/exec";
+let sessionToken=sessionStorage.getItem("caroliaAdminSession")||"";
+let requestBusy=false,frameCounter=0;
+
+function setStatus(id,message,type){const el=document.getElementById(id);el.className="status "+(type||"");el.textContent=message||"";}
+function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function sendRequest(payload,callback){
+  if(requestBusy){callback({success:false,error:"Please wait for the current request to finish."});return;}
+  requestBusy=true;
+  const requestId="admin-request-"+(++frameCounter);
+  const frame=document.createElement("iframe");frame.name=requestId;frame.style.display="none";document.body.appendChild(frame);
+  const form=document.createElement("form");form.method="POST";form.action=SCRIPT_URL;form.target=requestId;form.style.display="none";
+  const field=document.createElement("input");field.type="hidden";field.name="payload";field.value=JSON.stringify(payload);form.appendChild(field);document.body.appendChild(form);
+  let done=false;
+  function cleanup(){if(done)return;done=true;clearTimeout(timer);window.removeEventListener("message",onMessage);form.remove();frame.remove();requestBusy=false;}
+  const timer=setTimeout(()=>{cleanup();callback({success:false,error:"The server did not respond. Please try again."});},30000);
+  function onMessage(event){const data=event.data;if(!data||data.type!=="CAROLIA_ADMIN_RESULT")return;cleanup();callback(data);}
+  window.addEventListener("message",onMessage);form.submit();
+}
+
+function showRecords(containerId,records){
+  const container=document.getElementById(containerId);
+  if(!Array.isArray(records)||!records.length){container.innerHTML='<p class="small">No matching registrations found.</p>';return;}
+  container.innerHTML=records.map(r=>'<article class="record"><h3>'+escapeHtml(r.registrationId)+'</h3><dl>'+
+    '<dt>Submitted At</dt><dd>'+escapeHtml(r.submittedAt)+'</dd>'+
+    '<dt>Participant</dt><dd>'+escapeHtml(r.participantName)+'</dd>'+
+    '<dt>Parish</dt><dd>'+escapeHtml(r.parishName)+'</dd>'+
+    '<dt>Diocese</dt><dd>'+escapeHtml(r.diocese)+'</dd>'+
+    '<dt>Country</dt><dd>'+escapeHtml(r.country)+'</dd>'+
+    '<dt>State / Province</dt><dd>'+escapeHtml(r.state)+'</dd>'+
+    '<dt>District / Region</dt><dd>'+escapeHtml(r.district)+'</dd>'+
+    '<dt>WhatsApp Number</dt><dd>'+escapeHtml(r.phone)+'</dd>'+
+    '<dt>Category</dt><dd>'+escapeHtml(r.competitionCategory)+'</dd>'+
+    '<dt>Rules Accepted</dt><dd>'+escapeHtml(r.rulesAccepted)+'</dd>'+
+    '</dl></article>').join("");
+}
+
+function loadDashboard(){
+  sendRequest({action:"admindashboard",sessionToken:sessionToken},data=>{
+    if(!data.success){setStatus("dashboardStatus",data.error||"Could not load dashboard.","error");if((data.error||"").toLowerCase().includes("session"))logoutLocal();return;}
+    document.getElementById("totalCount").textContent=String(data.totalRegistrations??0);
+    document.getElementById("recentCount").textContent=String((data.recentRegistrations||[]).length);
+    showRecords("recentRecords",data.recentRegistrations||[]);
+    setStatus("dashboardStatus","Dashboard updated.","show");
+  });
+}
+function showDashboard(username){
+  document.getElementById("loginPanel").hidden=true;
+  document.getElementById("dashboard").hidden=false;
+  document.getElementById("welcome").textContent="Signed in as "+username;
+  loadDashboard();
+}
+function logoutLocal(){
+  sessionToken="";sessionStorage.removeItem("caroliaAdminSession");
+  document.getElementById("dashboard").hidden=true;
+  document.getElementById("loginPanel").hidden=false;
+}
+document.getElementById("loginForm").addEventListener("submit",e=>{
+  e.preventDefault();const button=document.getElementById("loginButton");button.disabled=true;
+  setStatus("loginStatus","Signing in...","");
+  sendRequest({action:"adminlogin",username:document.getElementById("username").value.trim(),password:document.getElementById("password").value},data=>{
+    button.disabled=false;
+    if(!data.success){setStatus("loginStatus",data.error||"Login failed.","error");return;}
+    sessionToken=data.sessionToken;sessionStorage.setItem("caroliaAdminSession",sessionToken);
+    document.getElementById("password").value="";
+    setStatus("loginStatus","Login successful.","show");showDashboard(data.username||"Admin");
+  });
+});
+document.getElementById("searchForm").addEventListener("submit",e=>{
+  e.preventDefault();const query=document.getElementById("searchQuery").value.trim();if(!query)return;
+  const button=document.getElementById("searchButton");button.disabled=true;setStatus("searchStatus","Searching...","");
+  sendRequest({action:"adminsearch",sessionToken:sessionToken,query:query},data=>{
+    button.disabled=false;
+    if(!data.success){setStatus("searchStatus",data.error||"Search failed.","error");return;}
+    setStatus("searchStatus",data.resultCount+" matching record(s).","show");
+    showRecords("searchResults",data.results||[]);
+  });
+});
+document.getElementById("passwordForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const currentPassword=document.getElementById("currentPassword").value;
+  const newPassword=document.getElementById("newPassword").value;
+  const confirmPassword=document.getElementById("confirmPassword").value;
+  if(newPassword!==confirmPassword){setStatus("passwordStatus","New password and confirmation do not match.","error");return;}
+  const button=document.getElementById("passwordButton");button.disabled=true;setStatus("passwordStatus","Updating password...","");
+  sendRequest({action:"changepassword",sessionToken:sessionToken,currentPassword:currentPassword,newPassword:newPassword},data=>{
+    button.disabled=false;
+    if(!data.success){setStatus("passwordStatus",data.error||"Password update failed.","error");return;}
+    document.getElementById("passwordForm").reset();setStatus("passwordStatus",data.message||"Password changed. Please login again.","show");
+    setTimeout(logoutLocal,1200);
+  });
+});
+document.getElementById("logoutButton").addEventListener("click",()=>{
+  const token=sessionToken;
+  if(!token){logoutLocal();return;}
+  sendRequest({action:"adminlogout",sessionToken:token},()=>logoutLocal());
+});
+
+if(sessionToken){showDashboard("Admin");}
+</script>
+</body>
+</html>
