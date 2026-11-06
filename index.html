@@ -322,7 +322,8 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
     <div id="registrationId" class="registration-id"></div>
     <dl id="registrationDetails" class="detail-list"></dl>
     <div class="modal-actions">
-      <button id="shareRegistration" class="share-button" type="button">Share Details · വിവരങ്ങൾ പങ്കിടുക ↗</button>
+      <button id="shareRegistration" class="share-button" type="button">Share on WhatsApp · WhatsApp വഴി പങ്കിടുക ↗</button>
+      <button id="closeSuccess" class="close-button" type="button">Close · അടയ്ക്കുക</button>
     </div>
   </div>
 </div>
@@ -337,9 +338,10 @@ country.addEventListener("change",updateLocation);updateLocation();
 function showSuccess(result){const registeredAt=new Date();lastRegistration={...result,registeredAt:registeredAt};registrationIdEl.textContent=result.registrationId;const registeredAtText=new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeStyle:'short'}).format(registeredAt);document.getElementById('registrationCreatedAt').textContent=registeredAtText;const rows=[['Registered On',registeredAtText],['Participant',result.details.participantName],['Parish',result.details.parishName],['Diocese',result.details.diocese],['Residence',`${result.details.country}, ${result.details.state}, ${result.details.district}`],['WhatsApp',result.details.phone],['Category','Individual / Single Category']];registrationDetails.innerHTML=rows.map(([k,v])=>`<dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v||'—')}</dd>`).join('');successModal.classList.add('open');document.body.style.overflow='hidden';}
 function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function closeSuccess(){successModal.classList.remove('open');document.body.style.overflow='';}
+document.getElementById('closeSuccess').addEventListener('click',closeSuccess);
 successModal.addEventListener('click',e=>{if(e.target===successModal)closeSuccess()});
 function registrationShareText(){if(!lastRegistration)return '';const d=lastRegistration.details;const registeredAtText=new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeStyle:'short'}).format(lastRegistration.registeredAt);return `CAROLIA 2026 – Registration Successful!\n\nRegistration ID: ${lastRegistration.registrationId}\nRegistered On: ${registeredAtText}\nParticipant: ${d.participantName}\nParish: ${d.parishName}\nDiocese: ${d.diocese}\nResidence: ${d.country}, ${d.state}, ${d.district}\nWhatsApp: ${d.phone}\nCategory: Individual / Single Category\n\nPlease keep this Registration ID for future reference.`;}
-shareRegistration.addEventListener('click',async()=>{if(!lastRegistration)return;const text=registrationShareText();try{if(navigator.share){await navigator.share({title:'CAROLIA 2026 Registration',text:text,url:window.location.origin+window.location.pathname+'#registration'});}else if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(text);alert('Registration details copied. Paste them into your preferred app.');}else{window.prompt('Copy your registration details:',text);}}catch(err){if(err&&err.name!=='AbortError'){window.prompt('Copy your registration details:',text);}}});
+shareRegistration.addEventListener('click',()=>{if(!lastRegistration)return;const text=registrationShareText();const whatsappUrl='https://wa.me/?text='+encodeURIComponent(text);window.open(whatsappUrl,'_blank','noopener,noreferrer');});
 
 
 // Public status lookup – confirmation only; no participant details are exposed.
@@ -371,7 +373,7 @@ submit.disabled=true;submit.textContent="Submitting...";
 const frame=document.createElement('iframe');frame.name='carolia-submit-'+token;frame.id='carolia-submit-'+token;frame.title='Registration submission';frame.style.display='none';document.body.appendChild(frame);
 const postForm=document.createElement('form');postForm.method='POST';postForm.action=SCRIPT_URL;postForm.target=frame.name;postForm.style.display='none';const input=document.createElement('input');input.type='hidden';input.name='payload';input.value=JSON.stringify(details);postForm.appendChild(input);document.body.appendChild(postForm);
 const timeout=setTimeout(()=>{if(activeToken===token){status.className='status error';status.textContent='We could not confirm your submission. Please contact the organizers before submitting again.';submit.disabled=false;submit.innerHTML='Submit Registration <span aria-hidden="true">→</span>';postForm.remove();frame.remove();}},30000);
-function onMessage(event){const data=event.data;if(!data||data.type!=='CAROLIA_REGISTRATION_RESULT'||data.token!==token)return;clearTimeout(timeout);window.removeEventListener('message',onMessage);postForm.remove();frame.remove();if(data.success){status.className='status show';status.textContent='Registration completed successfully.';showSuccess({registrationId:data.registrationId,details});form.reset();updateLocation();}else{status.className='status error';status.textContent=data.error||'Submission failed. Please try again or contact the organizers.';}submit.disabled=false;submit.innerHTML='Submit Registration <span aria-hidden="true">→</span>';}
+function onMessage(event){const data=event.data;if(!data||data.type!=='CAROLIA_REGISTRATION_RESULT'||data.token!==token)return;clearTimeout(timeout);window.removeEventListener('message',onMessage);postForm.remove();frame.remove();if(data.success){status.className='status show';status.textContent='Registration completed successfully.';showSuccess({registrationId:data.registrationId,details:data.details||details});form.reset();updateLocation();}else{status.className='status error';status.textContent=data.error||'Submission failed. Please try again or contact the organizers.';}submit.disabled=false;submit.innerHTML='Submit Registration <span aria-hidden="true">→</span>';}
 window.addEventListener('message',onMessage);postForm.submit();});
 document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
 const siteNav=document.getElementById("siteNav");
