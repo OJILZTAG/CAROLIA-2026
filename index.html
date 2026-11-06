@@ -264,7 +264,7 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 <div class="presenter">Online Christmas Carol Singing Competition</div>
 <p class="tagline">Sing His Glory, Share His Love</p>
 </header>
-<nav id="siteNav" aria-label="Main navigation"><a href="#about">About</a><a href="#prizes">Prizes</a><a href="#rules">Rules</a><a href="#participate">Join</a><a href="#registration">Register</a><a href="#organizers">Team</a></nav>
+<nav id="siteNav" aria-label="Main navigation"><a href="#about">About</a><a href="#prizes">Prizes</a><a href="#rules">Rules</a><a href="#participate">Join</a><a href="#registration">Register</a><a href="#registration-status">Check Status</a><a href="#organizers">Team</a><a href="admin.html">Admin</a></nav>
 <main>
 <div class="hero"><img class="poster" src="assets/carolia-poster.png" alt="CAROLIA 2026 event poster"><div class="poster-caption">Let the Christmas Spirit Sing! | ക്രിസ്മസ് സന്തോഷം ഗാനങ്ങളിലൂടെ പങ്കുവെക്കാം!</div></div>
 <section id="about" class="reveal"><div class="pair"><div><h2>Welcome to CAROLIA 2026</h2><p>Celebrate the joy of Christmas through the beauty of carol singing. Mathruvedhi Teams welcomes individual participants from India and around the world to share their voice in this online competition.</p></div><div class="ml"><h2>CAROLIA 2026-ലേക്ക് സ്വാഗതം</h2><p>കരോൾ ഗാനങ്ങളിലൂടെ ക്രിസ്മസിന്റെ സന്തോഷം പങ്കുവെക്കാം. ഇന്ത്യയിൽ നിന്നും ലോകത്തിന്റെ വിവിധ ഭാഗങ്ങളിൽ നിന്നുമുള്ള വ്യക്തിഗത മത്സരാർത്ഥികളെ Mathruvedhi Teams സ്വാഗതം ചെയ്യുന്നു.</p></div></div></section>
@@ -285,6 +285,14 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 
 <section id="rules" class="reveal"><div class="pair"><div><h2>Competition Rules</h2><ul class="rules"><li>Individual entries only.</li><li>Christmas carol songs only.</li><li>Karaoke track is allowed.</li><li>Record in landscape mode with a stable camera.</li><li>No editing, mixing, or filters.</li><li>Audio and video must be clear.</li><li>Christmas setting is preferred.</li><li>Judges’ decision will be final.</li></ul></div><div class="ml"><h2>മത്സര നിബന്ധനകൾ</h2><ul class="rules"><li>വ്യക്തിഗത പങ്കാളിത്തം മാത്രം.</li><li>ക്രിസ്മസ് കരോൾ ഗാനങ്ങൾ മാത്രം.</li><li>കരോക്കെ ട്രാക്ക് അനുവദനീയമാണ്.</li><li>സ്ഥിരമായ ക്യാമറയിൽ ലാൻഡ്‌സ്‌കേപ്പ് രീതിയിൽ റെക്കോർഡ് ചെയ്യുക.</li><li>എഡിറ്റിംഗ്, മിക്സിംഗ്, ഫിൽട്ടറുകൾ അനുവദനീയമല്ല.</li><li>ശബ്ദവും ദൃശ്യവും വ്യക്തമായിരിക്കണം.</li><li>ക്രിസ്മസ് പശ്ചാത്തലം അഭികാമ്യം.</li><li>വിധികർത്താക്കളുടെ തീരുമാനം അന്തിമമാണ്.</li></ul></div></div></section>
 <section id="participate" class="reveal"><h2>How to Participate | എങ്ങനെ പങ്കെടുക്കാം</h2><div class="steps"><div class="step"><div class="num">1</div><b>Register | രജിസ്റ്റർ</b>Complete the form below.<br>ഫോം പൂരിപ്പിക്കുക.</div><div class="step"><div class="num">2</div><b>Prepare | തയ്യാറാകുക</b>Practice and record your carol.<br>കരോൾ പരിശീലിച്ച് റെക്കോർഡ് ചെയ്യുക.</div><div class="step"><div class="num">3</div><b>Submit Video | വീഡിയോ അയയ്ക്കുക</b>Follow organizer instructions.<br>സംഘാടകരുടെ നിർദ്ദേശങ്ങൾ പാലിക്കുക.</div><div class="step"><div class="num">4</div><b>Stay Tuned | അറിയിപ്പുകൾ</b>Watch for updates.<br>പുതിയ അറിയിപ്പുകൾ ശ്രദ്ധിക്കുക.</div></div></section>
+<section id="registration-status" class="reveal">
+<h2>Check Registration Status · രജിസ്ട്രേഷൻ നില പരിശോധിക്കുക</h2>
+<p class="form-lead">Enter your Registration ID or registered mobile number. Only confirmation status will be displayed.</p>
+<form id="statusLookupForm"><div class="form-grid">
+<div><label for="lookupRegistrationId">Registration ID</label><input id="lookupRegistrationId" maxlength="30" placeholder="e.g. CRL26-123456"></div>
+<div><label for="lookupPhone">Registered Mobile Number</label><input id="lookupPhone" type="tel" maxlength="30" placeholder="Include country code"></div>
+<div class="full"><button id="lookupSubmit" type="submit">Check Status · പരിശോധിക്കുക</button><div id="lookupStatus" class="status" role="status" aria-live="polite"></div></div>
+</div></form></section>
 <section id="registration" class="form-section reveal"><h2>Official Registration · ഔദ്യോഗിക രജിസ്ട്രേഷൻ</h2><p class="form-lead">Please complete the required details. · ആവശ്യമായ വിവരങ്ങൾ പൂരിപ്പിക്കുക.</p>
 <form id="form"><div class="form-grid">
 <div><label for="participantName">Participant Name | പങ്കെടുക്കുന്നയാളുടെ പേര് *</label><input id="participantName" name="participantName" required maxlength="120" autocomplete="name"></div>
@@ -332,6 +340,28 @@ function closeSuccess(){successModal.classList.remove('open');document.body.styl
 successModal.addEventListener('click',e=>{if(e.target===successModal)closeSuccess()});
 function registrationShareText(){if(!lastRegistration)return '';const d=lastRegistration.details;const registeredAtText=new Intl.DateTimeFormat('en-IN',{dateStyle:'full',timeStyle:'short'}).format(lastRegistration.registeredAt);return `CAROLIA 2026 – Registration Successful!\n\nRegistration ID: ${lastRegistration.registrationId}\nRegistered On: ${registeredAtText}\nParticipant: ${d.participantName}\nParish: ${d.parishName}\nDiocese: ${d.diocese}\nResidence: ${d.country}, ${d.state}, ${d.district}\nWhatsApp: ${d.phone}\nCategory: Individual / Single Category\n\nPlease keep this Registration ID for future reference.`;}
 shareRegistration.addEventListener('click',async()=>{if(!lastRegistration)return;const text=registrationShareText();try{if(navigator.share){await navigator.share({title:'CAROLIA 2026 Registration',text:text,url:window.location.origin+window.location.pathname+'#registration'});}else if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(text);alert('Registration details copied. Paste them into your preferred app.');}else{window.prompt('Copy your registration details:',text);}}catch(err){if(err&&err.name!=='AbortError'){window.prompt('Copy your registration details:',text);}}});
+
+
+// Public status lookup – confirmation only; no participant details are exposed.
+const statusLookupForm=document.getElementById("statusLookupForm");
+const lookupStatus=document.getElementById("lookupStatus");
+const lookupSubmit=document.getElementById("lookupSubmit");
+statusLookupForm.addEventListener("submit",e=>{
+  e.preventDefault();
+  const registrationId=document.getElementById("lookupRegistrationId").value.trim();
+  const phone=document.getElementById("lookupPhone").value.trim();
+  if(!registrationId&&!phone){lookupStatus.className="status error";lookupStatus.textContent="Enter your Registration ID or mobile number.";return;}
+  lookupSubmit.disabled=true;lookupStatus.className="status";lookupStatus.textContent="Checking...";
+  const token=crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2);
+  const frame=document.createElement("iframe");frame.name="carolia-lookup-"+token;frame.style.display="none";document.body.appendChild(frame);
+  const postForm=document.createElement("form");postForm.method="POST";postForm.action=SCRIPT_URL;postForm.target=frame.name;postForm.style.display="none";
+  const input=document.createElement("input");input.type="hidden";input.name="payload";input.value=JSON.stringify({action:"lookup",registrationId:registrationId,phone:phone,clientToken:token});postForm.appendChild(input);document.body.appendChild(postForm);
+  let finished=false;
+  const cleanup=()=>{if(finished)return;finished=true;clearTimeout(timer);window.removeEventListener("message",onMessage);postForm.remove();frame.remove();lookupSubmit.disabled=false;};
+  const timer=setTimeout(()=>{cleanup();lookupStatus.className="status error";lookupStatus.textContent="Unable to verify right now. Please try again later.";},25000);
+  function onMessage(event){const data=event.data;if(!data||data.type!=="CAROLIA_STATUS_RESULT"||data.token!==token)return;cleanup();if(data.success&&data.result&&data.result.found){lookupStatus.className="status show";lookupStatus.textContent="✓ Registration Confirmed";}else if(data.success){lookupStatus.className="status error";lookupStatus.textContent="No Registration Found";}else{lookupStatus.className="status error";lookupStatus.textContent=data.error||"Status check failed.";}}
+  window.addEventListener("message",onMessage);postForm.submit();
+});
 
 form.addEventListener("submit",e=>{e.preventDefault();status.className="status";if(SCRIPT_URL.startsWith("PASTE_")){status.className="status error";status.textContent="The registration form is not connected yet. Please contact the organizers.";return}
 const details={participantName:form.participantName.value.trim(),parishName:form.parishName.value.trim(),diocese:form.diocese.value.trim(),country:country.value==="India"?"India":otherCountry.value.trim(),state:state.value.trim(),district:district.value.trim(),phone:form.phone.value.trim(),competitionCategory:"Individual / Single Category",rulesAccepted:document.getElementById("rulesAccepted").checked};
