@@ -183,18 +183,21 @@ document.addEventListener('click',event=>{
   button.textContent=expanded?'Read less −':'Read more +';
 });
 function registrationRecordShareText(r){
-  return '*CAROLIA 2026 | REGISTRATION DETAILS*\n'+
+  return '🎄 *CAROLIA 2026*\n'+
+    '*REGISTRATION DETAILS*\n'+
     '━━━━━━━━━━━━━━\n\n'+
-    'Registration ID: '+(r.registrationId||'—')+'\n'+
-    'Registered On: '+(r.submittedAt||'—')+'\n\n'+
-    '*PARTICIPANT INFORMATION*\n'+
-    'Name: '+(r.participantName||'—')+'\n'+
-    'Parish: '+(r.parishName||'—')+'\n'+
-    'Diocese: '+(r.diocese||'—')+'\n'+
-    'Residence: '+[r.country,r.state,r.district].filter(Boolean).join(', ')+'\n'+
-    'WhatsApp: '+(r.phone||'—')+'\n'+
-    'Category: '+(r.competitionCategory||'Individual / Single Category')+'\n\n'+
-    'Registration Website: https://carolia.ojilztag.com/';
+    '🆔 *Registration ID:* '+(r.registrationId||'—')+'\n'+
+    '📅 *Registered On:* '+(r.submittedAt||'—')+'\n\n'+
+    '👤 *PARTICIPANT INFORMATION*\n'+
+    '━━━━━━━━━━━━━━\n'+
+    '• *Name:* '+(r.participantName||'—')+'\n'+
+    '• *Parish:* '+(r.parishName||'—')+'\n'+
+    '• *Diocese:* '+(r.diocese||'—')+'\n'+
+    '• *Residence:* '+[r.country,r.state,r.district].filter(Boolean).join(', ')+'\n'+
+    '• *WhatsApp:* '+(r.phone||'—')+'\n'+
+    '• *Category:* '+(r.competitionCategory||'Individual / Single Category')+'\n\n'+
+    '🌐 *REGISTRATION WEBSITE*\n'+
+    'https://carolia.ojilztag.com/';
 }
 document.addEventListener('click',async event=>{
   const button=event.target.closest('.record-share-button');
