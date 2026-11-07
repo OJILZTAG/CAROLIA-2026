@@ -375,6 +375,13 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 @keyframes noticeHighlightScroll{to{transform:translateX(-50%)}}
 @media(max-width:600px){.notice-highlight{padding:0 12px;margin:10px auto 16px}.notice-highlight-label{padding:0 10px;font-size:.72rem}.notice-highlight-link{padding:0 10px;font-size:.74rem}.notice-highlight-track a{font-size:.82rem}}
 @media(prefers-reduced-motion:reduce){.notice-highlight-track{animation:none;white-space:normal;flex-wrap:wrap}}
+
+/* Organizer contact panel: full-width, balanced with the green committee cards */
+#contact.contact.contact-notice{display:block;width:100%;max-width:none;box-sizing:border-box;margin:22px 0 24px;padding:clamp(26px,4vw,42px) clamp(18px,3vw,34px);background:linear-gradient(155deg,#07583a 0%,#06432f 100%);border:1px solid #d7ad55;border-radius:20px;box-shadow:0 10px 26px #123b2b20;text-align:center}
+#contact.contact.contact-notice h2{margin:0 0 14px;font-size:clamp(1.3rem,3vw,1.8rem);line-height:1.35;color:#f4d98e}
+#contact.contact.contact-notice .contact-lead{width:100%;max-width:none;margin:8px auto 0;font-size:clamp(1rem,2.2vw,1.15rem);line-height:1.65;color:#fff}
+#contact.contact.contact-notice .contact-lead.ml{padding:0;margin-top:10px;border:0;border-radius:0;background:transparent;color:#fff}
+@media(max-width:600px){#contact.contact.contact-notice{margin:18px 0 22px;padding:24px 16px}#contact.contact.contact-notice h2{font-size:1.25rem}}
 </style>
 
 
