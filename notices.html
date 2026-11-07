@@ -39,6 +39,13 @@ footer{text-align:center;color:#f8e7b5;background:#31070d;padding:22px 16px;font
 @media(max-width:600px){.page-jump-controls{right:10px;bottom:12px;gap:8px}.page-jump{width:40px;height:40px}}
 
 @media(max-width:600px){.header-inner{align-items:flex-start;flex-direction:column}.home{width:100%;text-align:center}.toolbar{grid-template-columns:1fr}.notice{grid-template-columns:1fr;gap:7px}.board-head{flex-direction:column}}
+
+/* CAROLIA shared page navigation: identical on every page */
+.page-float-controls,.page-jump-controls{position:fixed;right:16px;bottom:22px;z-index:90;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.page-float-controls button,.page-jump-controls button{pointer-events:auto;display:none;place-items:center;width:48px;height:48px;min-width:48px;padding:0;border:1px solid #d7ad55;border-radius:50%;background:#173c32;color:#fff;box-shadow:0 5px 18px #0003;font:800 1.35rem/1 "DM Sans",sans-serif;cursor:pointer}
+.page-float-controls button.is-visible,.page-jump-controls button.is-visible{display:grid}
+.page-float-controls button:hover,.page-jump-controls button:hover{transform:translateY(-2px);background:#07533e}
+@media(max-width:760px){.page-float-controls,.page-jump-controls{right:12px;bottom:18px}.page-float-controls button,.page-jump-controls button{width:44px;height:44px;min-width:44px;font-size:1.2rem}}
 </style>
 </head>
 <body>
@@ -70,6 +77,23 @@ list.addEventListener("click",async event=>{const button=event.target.closest("[
 document.getElementById("shareNoticesPage").addEventListener("click",async buttonEvent=>{const button=buttonEvent.currentTarget;const shareUrl=location.origin+location.pathname;const shareTitle="CAROLIA 2026 | Notices & Announcements";const shareText="Official programme updates, announcements and instructions from CAROLIA 2026.";const copyText=shareTitle+"\n"+shareText+"\n"+shareUrl;try{if(navigator.share){await navigator.share({title:shareTitle,text:shareText,url:shareUrl});}else if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(copyText);button.textContent="✓ Page Link Copied";}else{button.textContent="Share unavailable";}}catch(err){if(err&&err.name!=="AbortError")button.textContent="Try sharing again";}});
 document.getElementById("scrollTopButton").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 document.getElementById("scrollBottomButton").addEventListener("click",()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"}));
+
+/* One directional page control at a time: down in the upper half, up in the lower half. */
+function updatePageJumpControls(){
+ const up=document.getElementById("scrollTopButton"),down=document.getElementById("scrollBottomButton");
+ if(!up||!down)return;
+ const max=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+ const y=window.scrollY||document.documentElement.scrollTop;
+ const canScroll=max>8;
+ const showUp=canScroll&&y>=max/2;
+ up.classList.toggle("is-visible",showUp);
+ down.classList.toggle("is-visible",canScroll&&!showUp);
+}
+window.addEventListener("scroll",updatePageJumpControls,{passive:true});
+window.addEventListener("resize",updatePageJumpControls);
+window.addEventListener("load",updatePageJumpControls);
+updatePageJumpControls();
+
 search.addEventListener("input",render);year.addEventListener("change",render);window.addEventListener("hashchange",()=>{render();});render();
 </script>
 </body>
