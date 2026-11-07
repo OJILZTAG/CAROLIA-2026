@@ -129,7 +129,7 @@ function sendRequest(payload,callback){
   let done=false;
   function cleanup(){if(done)return;done=true;clearTimeout(timer);window.removeEventListener("message",onMessage);form.remove();frame.remove();requestBusy=false;}
   const timer=setTimeout(()=>{cleanup();callback({success:false,error:"The server did not respond. Please try again."});},30000);
-  function onMessage(event){const data=event.data;if(!data||data.type!=="CAROLIA_ADMIN_RESULT")return;cleanup();callback(data);}
+  function onMessage(event){const data=event.data;if(event.source!==frame.contentWindow||!data||data.type!=="CAROLIA_ADMIN_RESULT")return;cleanup();callback(data);}
   window.addEventListener("message",onMessage);form.submit();
 }
 
