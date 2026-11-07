@@ -216,6 +216,19 @@ main{max-width:1320px}
 .page-float-controls button.is-visible,.page-jump-controls button.is-visible{display:grid}
 .page-float-controls button:hover,.page-jump-controls button:hover{transform:translateY(-2px);background:#07533e}
 @media(max-width:760px){.page-float-controls,.page-jump-controls{right:12px;bottom:18px}.page-float-controls button,.page-jump-controls button{width:44px;height:44px;min-width:44px;font-size:1.2rem}}
+
+/* Organizer cards: green cards sized evenly inside the organizer section */
+#organizers .organizer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:clamp(14px,2vw,22px)}
+#organizers .organizer-card{width:100%;min-width:0;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:clamp(18px,2.5vw,26px);gap:14px;border:1px solid #d7ad55;border-top:3px solid #d7ad55;border-radius:20px;background:linear-gradient(155deg,#07583a 0%,#06432f 100%);box-shadow:0 10px 26px #123b2b20;color:#fff;text-align:center}
+#organizers .organizer-card>img{width:clamp(84px,8vw,104px);height:clamp(84px,8vw,104px);flex:0 0 auto;border:4px solid #e2c16c;box-shadow:0 0 0 5px #ffffff18}
+#organizers .organizer-card>div{width:100%;display:flex;flex:1;flex-direction:column;align-items:center;gap:6px}
+#organizers .organizer-role{color:#f4d98e;font-size:.72rem}
+#organizers .organizer-card h3{color:#fff;font-size:clamp(1.05rem,1.5vw,1.2rem)}
+#organizers .organizer-card p{color:#e0eee6;font-size:.92rem}
+#organizers .organizer-card .organizer-phone{margin-top:auto;background:#e4bd62;color:#173c32!important;box-shadow:0 4px 0 #b28b36;font-size:.92rem}
+#organizers .organizer-card .organizer-phone:hover{background:#f1d58a}
+@media(max-width:760px){#organizers .organizer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){#organizers .organizer-grid{grid-template-columns:1fr;gap:14px}#organizers .organizer-card{padding:22px 18px}}
 </style>
 <script>
 (function(){try{const u=new URL(window.location.href);if(u.searchParams.get("utm_source")==="chatgpt.com"){u.searchParams.delete("utm_source");window.history.replaceState({},document.title,u.pathname+u.search+u.hash);}}catch(e){}})();
