@@ -382,6 +382,11 @@ section{padding:clamp(24px,4vw,42px);margin:24px 0;border-radius:20px}
 #contact.contact.contact-notice .contact-lead{width:100%;max-width:none;margin:8px auto 0;font-size:clamp(1rem,2.2vw,1.15rem);line-height:1.65;color:#fff}
 #contact.contact.contact-notice .contact-lead.ml{padding:0;margin-top:10px;border:0;border-radius:0;background:transparent;color:#fff}
 @media(max-width:600px){#contact.contact.contact-notice{margin:18px 0 22px;padding:24px 16px}#contact.contact.contact-notice h2{font-size:1.25rem}}
+
+/* Tighten only the closing contact-to-footer spacing */
+#contact.contact.contact-notice{margin-bottom:0!important}
+main:has(>#contact.contact-notice){padding-bottom:12px!important}
+@media(max-width:760px){main:has(>#contact.contact-notice){padding-bottom:8px!important}#contact.contact.contact-notice{margin-bottom:0!important}}
 </style>
 
 
