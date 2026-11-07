@@ -159,7 +159,7 @@ function registrationRecordShareText(r){
     'Name: '+(r.participantName||'—')+'\n'+
     'Parish: '+(r.parishName||'—')+'\n'+
     'Diocese: '+(r.diocese||'—')+'\n'+
-    'Residence: '+[r.district,r.state,r.country].filter(Boolean).join(', ')+'\n'+
+    'Residence: '+[r.country,r.state,r.district].filter(Boolean).join(', ')+'\n'+
     'WhatsApp: '+(r.phone||'—')+'\n'+
     'Category: '+(r.competitionCategory||'Individual / Single Category')+'\n\n'+
     'Registration Website: https://carolia.ojilztag.com/';
