@@ -546,4 +546,28 @@ siteNav.addEventListener("click",event=>{if(event.target.closest("a"))closeSiteM
 window.addEventListener("resize",()=>{if(window.innerWidth>760)closeSiteMenu();});
 document.addEventListener("keydown",event=>{if(event.key==="Escape")closeSiteMenu();});document.getElementById("scrollTopButton").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));document.getElementById("scrollBottomButton").addEventListener("click",()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"}));
 </script>
+<script src="notices-data.js"></script>
+<script>
+/* Build the homepage scrolling ticker from the same source as notices.html. */
+(function(){
+  const track=document.getElementById("noticeHighlightTrack");
+  if(!track)return;
+  const notices=(window.CAROLIA_NOTICES||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));
+  if(!notices.length){
+    track.innerHTML='<a href="notices.html">No notices published yet — View notices</a>';
+    track.style.animation="none";
+    return;
+  }
+  const makeLink=n=>{
+    const a=document.createElement("a");
+    a.href="notices.html";
+    a.textContent=n.title;
+    a.title=n.summary||n.title;
+    return a;
+  };
+  track.replaceChildren(...notices.map(makeLink),...notices.map(n=>{
+    const a=makeLink(n);a.setAttribute("aria-hidden","true");return a;
+  }));
+})();
+</script>
 </body></html>
