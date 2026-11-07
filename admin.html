@@ -33,8 +33,7 @@ button:disabled{opacity:.55;cursor:wait}
 .status{display:none;padding:12px 14px;border-radius:10px;margin-top:12px;font-weight:700;overflow-wrap:anywhere}.status.show{display:block;background:#e8f6eb;color:#14552d}.status.error{display:block;background:#ffebe7;color:#8c2118}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
 .table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:760px}th,td{text-align:left;padding:10px;border-bottom:1px solid #eadfca;vertical-align:top}th{background:#fff4d6;color:var(--wine)}td{font-size:.9rem}
-.record{border:1px solid #e7d9bd;border-radius:12px;padding:14px;margin:12px 0;background:#fff}
-.record h3{margin:0 0 10px;color:var(--green)}.record dl{display:grid;grid-template-columns:170px 1fr;gap:5px 12px;margin:0}.record dt{font-weight:800;color:var(--muted)}.record dd{margin:0;overflow-wrap:anywhere}
+.record{border:1px solid #e7d9bd;border-radius:12px;padding:12px 14px;margin:10px 0;background:#fff}.record-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.record-summary-main{min-width:0}.record h3{margin:0;color:var(--green);font-size:1rem}.record-summary-meta{font-size:.84rem;color:var(--muted);overflow-wrap:anywhere}.record-actions{display:flex;gap:8px;flex-wrap:wrap}.record-actions button{margin-top:8px;padding:8px 12px;font-size:.84rem}.record-toggle-button{background:#695345}.record-details{display:none;margin-top:12px;padding-top:12px;border-top:1px solid #eee3cf}.record.is-expanded .record-details{display:block}.record dl{display:grid;grid-template-columns:150px 1fr;gap:4px 10px;margin:0}.record dt{font-weight:800;color:var(--muted)}.record dd{margin:0;overflow-wrap:anywhere}
 .small{font-size:.86rem;color:var(--muted)}[hidden]{display:none!important}
 @media(max-width:650px){.grid,.metrics{grid-template-columns:1fr}.full{grid-column:auto}.record dl{grid-template-columns:1fr;gap:1px}.record dd{margin-bottom:8px}}
 /* Professional administration portal */
@@ -153,9 +152,15 @@ function sendRequest(payload,callback){
 
 function showRecords(containerId,records){
   const container=document.getElementById(containerId);
-  if(!Array.isArray(records)||!records.length){container.innerHTML='<p class="small">No matching registrations found.</p>';return;}
+  if(!Array.isArray(records)||!records.length){container.innerHTML='<p class="small">No matching registrations found.</p>';container._records=[];return;}
   container._records=records;
-  container.innerHTML=records.map((r,index)=>'<article class="record"><h3>'+escapeHtml(r.registrationId)+'</h3><dl>'+
+  container.innerHTML=records.map((r,index)=>'<article class="record">'+
+    '<div class="record-summary"><div class="record-summary-main">'+
+    '<h3>'+escapeHtml(r.registrationId)+'</h3>'+
+    '<div class="record-summary-meta">'+escapeHtml(r.participantName)+' · '+escapeHtml(r.submittedAt)+'</div></div>'+
+    '<div class="record-actions"><button type="button" class="record-toggle-button" data-record-index="'+index+'" aria-expanded="false">Read more +</button>'+
+    '<button type="button" class="record-share-button" data-record-index="'+index+'">Share ↗</button></div></div>'+
+    '<div class="record-details"><dl>'+
     '<dt>Submitted At</dt><dd>'+escapeHtml(r.submittedAt)+'</dd>'+
     '<dt>Participant</dt><dd>'+escapeHtml(r.participantName)+'</dd>'+
     '<dt>Parish</dt><dd>'+escapeHtml(r.parishName)+'</dd>'+
@@ -166,14 +171,23 @@ function showRecords(containerId,records){
     '<dt>WhatsApp Number</dt><dd>'+escapeHtml(r.phone)+'</dd>'+
     '<dt>Category</dt><dd>'+escapeHtml(r.competitionCategory)+'</dd>'+
     '<dt>Rules Accepted</dt><dd>'+escapeHtml(r.rulesAccepted)+'</dd>'+
-    '</dl><button type="button" class="record-share-button" data-record-index="'+index+'">Share This Registration ↗</button></article>').join("");
+    '</dl></div></article>').join("");
 }
+document.addEventListener('click',event=>{
+  const button=event.target.closest('.record-toggle-button');
+  if(!button)return;
+  const card=button.closest('.record');
+  if(!card)return;
+  const expanded=card.classList.toggle('is-expanded');
+  button.setAttribute('aria-expanded',String(expanded));
+  button.textContent=expanded?'Read less −':'Read more +';
+});
 function registrationRecordShareText(r){
-  return 'CAROLIA 2026 | REGISTRATION DETAILS\n'+
-    '━━━━━━━━━━━━━━━━━━━━━━━━\n\n'+
+  return '*CAROLIA 2026 | REGISTRATION DETAILS*\n'+
+    '━━━━━━━━━━━━━━\n\n'+
     'Registration ID: '+(r.registrationId||'—')+'\n'+
     'Registered On: '+(r.submittedAt||'—')+'\n\n'+
-    'PARTICIPANT INFORMATION\n'+
+    '*PARTICIPANT INFORMATION*\n'+
     'Name: '+(r.participantName||'—')+'\n'+
     'Parish: '+(r.parishName||'—')+'\n'+
     'Diocese: '+(r.diocese||'—')+'\n'+
