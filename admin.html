@@ -20,7 +20,12 @@ label{display:block;font-weight:800;margin:12px 0 6px}
 input{width:100%;padding:13px 14px;border:1px solid #d6c49a;border-radius:10px;font:inherit;background:white}
 input:focus{outline:3px solid #0b79501c;border-color:var(--green)}
 button,.button{border:0;border-radius:10px;padding:12px 18px;background:var(--green);color:white;font:800  .95rem "DM Sans",sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;margin-top:14px}
-button:disabled{opacity:.55;cursor:wait}.secondary{background:#695345}.danger{background:#8c2118}
+button:disabled{opacity:.55;cursor:wait}
+#refreshButton{display:inline-flex;align-items:center;gap:8px}
+#refreshButton .refresh-icon{display:inline-block;font-size:1.25em;line-height:1;transform-origin:center}
+#refreshButton.is-refreshing .refresh-icon{animation:caroliaRefreshSpin .75s linear infinite}
+@keyframes caroliaRefreshSpin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){#refreshButton.is-refreshing .refresh-icon{animation-duration:2s}}.secondary{background:#695345}.danger{background:#8c2118}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.full{grid-column:1/-1}
 .metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .metric{background:#fff4d6;border:1px solid #e8c76c;border-radius:14px;padding:18px}
@@ -88,7 +93,7 @@ footer{background:#172a27!important;color:#ffe9ac;text-align:center;padding:28px
 <div id="dashboard" hidden>
 <nav class="admin-nav" aria-label="Admin sections"><a href="#overview">Overview</a><a href="#participantSearch">Search Participants</a><a href="#recent">Recent Records</a><a href="#account">Account Settings</a></nav>
 <section class="panel" id="overview">
-<div class="toolbar"><div><h2>Dashboard Overview</h2><div class="small" id="welcome"></div></div><div class="toolbar-actions"><button id="refreshButton" class="secondary" type="button">↻ Refresh</button><button id="logoutButton" class="danger" type="button">Logout ↗</button></div></div>
+<div class="toolbar"><div><h2>Dashboard Overview</h2><div class="small" id="welcome"></div></div><div class="toolbar-actions"><button id="refreshButton" class="secondary" type="button"><span class="refresh-icon" aria-hidden="true">↻</span><span>Refresh</span></button><button id="logoutButton" class="danger" type="button">Logout ↗</button></div></div>
 <div class="metrics"><div class="metric"><span>Total Registrations</span><strong id="totalCount">—</strong></div><div class="metric"><span>Recent Records Displayed</span><strong id="recentCount">—</strong></div></div>
 <div id="dashboardStatus" class="status" role="status"></div>
 </section>
@@ -192,13 +197,27 @@ document.addEventListener('click',async event=>{
 });
 
 function loadDashboard(){
-  sendRequest({action:"admindashboard",sessionToken:sessionToken},data=>{
-    if(!data.success){setStatus("dashboardStatus",data.error||"Could not load dashboard.","error");if((data.error||"").toLowerCase().includes("session"))logoutLocal();return;}
-    document.getElementById("totalCount").textContent=String(data.totalRegistrations??0);
-    document.getElementById("recentCount").textContent=String((data.recentRegistrations||[]).length);
-    showRecords("recentRecords",data.recentRegistrations||[]);
-    setStatus("dashboardStatus","Dashboard updated.","show");
-  });
+  const button=document.getElementById("refreshButton");
+  if(button.disabled)return;
+  button.disabled=true;
+  button.classList.add("is-refreshing");
+  button.setAttribute("aria-busy","true");
+  setStatus("dashboardStatus","Refreshing dashboard…","show");
+  const finish=()=>{
+    button.disabled=false;
+    button.classList.remove("is-refreshing");
+    button.removeAttribute("aria-busy");
+  };
+  try{
+    sendRequest({action:"admindashboard",sessionToken:sessionToken},data=>{
+      finish();
+      if(!data.success){setStatus("dashboardStatus",data.error||"Could not load dashboard.","error");if((data.error||"").toLowerCase().includes("session"))logoutLocal();return;}
+      document.getElementById("totalCount").textContent=String(data.totalRegistrations??0);
+      document.getElementById("recentCount").textContent=String((data.recentRegistrations||[]).length);
+      showRecords("recentRecords",data.recentRegistrations||[]);
+      setStatus("dashboardStatus","Dashboard updated.","show");
+    });
+  }catch(error){finish();setStatus("dashboardStatus","Could not refresh dashboard. Please try again.","error");}
 }
 function showDashboard(username){
   document.getElementById("loginPanel").hidden=true;
