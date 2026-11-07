@@ -239,11 +239,12 @@ updatePageJumpControls();
 </script>
 <style>
 /* Organizer section: roomier layout, smaller portraits */
-#organizers.organizers-section{padding:clamp(30px,5vw,52px);margin-top:30px;margin-bottom:30px}
-#organizers .organizer-grid{gap:18px}
-#organizers .organizer-card{gap:12px;padding:14px}
-#organizers .organizer-card>img{width:76px;height:76px;object-fit:cover;border-radius:12px}
-@media(max-width:600px){#organizers.organizers-section{padding:22px 16px}#organizers .organizer-grid{gap:12px}#organizers .organizer-card{padding:12px}#organizers .organizer-card>img{width:62px;height:62px}}
+/* Organizer section: use the full content width and original roomy card sizing. */
+#organizers.organizers-section{width:100%;max-width:none;margin:24px auto;padding:clamp(28px,4vw,44px)}
+#organizers .organizer-grid{width:100%;gap:22px}
+#organizers .organizer-card{padding:24px 22px 22px;gap:14px}
+#organizers .organizer-card>img{width:104px;height:104px;flex-basis:104px;object-fit:cover;object-position:center;border-radius:50%}
+@media(max-width:600px){#organizers.organizers-section{padding:24px 18px;margin:18px auto}#organizers .organizer-card{padding:20px 16px}#organizers .organizer-card>img{width:92px;height:92px;flex-basis:92px}}
 
 
 <style>
