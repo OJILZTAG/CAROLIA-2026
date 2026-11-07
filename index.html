@@ -209,25 +209,33 @@ main{max-width:1320px}
 .registration-id-prefix{display:flex;align-items:center;padding:0 0 0 18px;color:#321a16;font-weight:800;white-space:nowrap;letter-spacing:.02em}
 .registration-id-input input{flex:1;min-width:0;border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important}
 .registration-id-input:focus-within{outline:3px solid #0b79501c;border-color:#07583a}
+
+/* CAROLIA shared page navigation: identical on every page */
+.page-float-controls,.page-jump-controls{position:fixed;right:16px;bottom:22px;z-index:90;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.page-float-controls button,.page-jump-controls button{pointer-events:auto;display:none;place-items:center;width:48px;height:48px;min-width:48px;padding:0;border:1px solid #d7ad55;border-radius:50%;background:#173c32;color:#fff;box-shadow:0 5px 18px #0003;font:800 1.35rem/1 "DM Sans",sans-serif;cursor:pointer}
+.page-float-controls button.is-visible,.page-jump-controls button.is-visible{display:grid}
+.page-float-controls button:hover,.page-jump-controls button:hover{transform:translateY(-2px);background:#07533e}
+@media(max-width:760px){.page-float-controls,.page-jump-controls{right:12px;bottom:18px}.page-float-controls button,.page-jump-controls button{width:44px;height:44px;min-width:44px;font-size:1.2rem}}
 </style>
 <script>
 (function(){try{const u=new URL(window.location.href);if(u.searchParams.get("utm_source")==="chatgpt.com"){u.searchParams.delete("utm_source");window.history.replaceState({},document.title,u.pathname+u.search+u.hash);}}catch(e){}})();
 
-/* Directional scroll controls: show only the action relevant to current position. */
-(()=>{
- const up=document.getElementById("scrollTopButton");
- const down=document.getElementById("scrollBottomButton");
+
+/* One directional page control at a time: down in the upper half, up in the lower half. */
+function updatePageJumpControls(){
+ const up=document.getElementById("scrollTopButton"),down=document.getElementById("scrollBottomButton");
  if(!up||!down)return;
- const update=()=>{
-   const max=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
-   const y=window.scrollY||document.documentElement.scrollTop;
-   up.classList.toggle("is-visible",y>120);
-   down.classList.toggle("is-visible",max-y>160);
- };
- window.addEventListener("scroll",update,{passive:true});
- window.addEventListener("resize",update);
- update();
-})();
+ const max=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+ const y=window.scrollY||document.documentElement.scrollTop;
+ const canScroll=max>8;
+ const showUp=canScroll&&y>=max/2;
+ up.classList.toggle("is-visible",showUp);
+ down.classList.toggle("is-visible",canScroll&&!showUp);
+}
+window.addEventListener("scroll",updatePageJumpControls,{passive:true});
+window.addEventListener("resize",updatePageJumpControls);
+window.addEventListener("load",updatePageJumpControls);
+updatePageJumpControls();
 </script>
 <style>
 /* Organizer section: roomier layout, smaller portraits */
