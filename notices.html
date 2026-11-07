@@ -21,12 +21,12 @@ input,select{width:100%;padding:13px 14px;border:1px solid #d6c49a;border-radius
 .board{background:#fffdf8;border:1px solid var(--line);border-radius:20px;padding:clamp(18px,4vw,30px);box-shadow:0 18px 45px #39120d10}
 .board-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:8px}.board-head h2{font:700 1.2rem "Playfair Display",serif;color:var(--green);margin:0}
 .count{font-size:.8rem;color:var(--muted);font-weight:800}
-.notice{display:grid;grid-template-columns:145px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid #eee3cd}.notice:last-child{border:0}
-.date{font-weight:900;color:var(--green);font-size:.9rem}.date span{display:block;color:var(--muted);font-size:.76rem;font-weight:600;margin-top:4px}
-.notice h3{font-size:1.08rem;color:var(--wine);margin:0 0 7px}.notice p{margin:0;color:#514438;line-height:1.65}
+.notice{display:grid;grid-template-columns:160px 1fr;gap:22px;padding:24px 0;border-bottom:1px solid #eee3cd}.notice:last-child{border:0}
+.date{font-weight:900;color:var(--green);font-size:1rem;line-height:1.5}.date span{display:block;color:var(--muted);font-size:.88rem;font-weight:600;margin-top:5px}
+.notice h3{font-size:1.25rem;color:var(--wine);margin:0 0 9px}.notice p{margin:0;color:#514438;font-size:1.04rem;line-height:1.75}
 .tag{display:inline-block;margin-top:10px;padding:4px 9px;border-radius:999px;background:#edf5ee;color:var(--green);font-size:.72rem;font-weight:900}
 .empty{padding:32px 16px;text-align:center;color:var(--muted);background:#f7f4e9;border:1px dashed #d9c99f;border-radius:14px}.empty strong{display:block;color:var(--green);font-size:1.05rem;margin-bottom:5px}
-footer{text-align:center;color:#f8e7b5;background:#31070d;padding:22px 16px;font-size:.86rem}
+footer{text-align:center;color:#ffe9ac;background:#172a27;padding:28px 16px;border-top:3px solid #d7ad55;font-size:1rem;line-height:1.65}footer strong{color:#fff}
 .page-share{display:inline-flex;align-items:center;gap:7px;margin:0 0 20px;border:1px solid #d9c28b;border-radius:9px;background:#fff7e4;color:#07583a;padding:9px 13px;font:800 .84rem "DM Sans",sans-serif;cursor:pointer}
 .page-share:hover{background:#f8edcf}
 .page-share[hidden],.toolbar[hidden]{display:none}
@@ -38,7 +38,7 @@ footer{text-align:center;color:#f8e7b5;background:#31070d;padding:22px 16px;font
 .page-jump:hover{opacity:1;transform:translateY(-2px)}
 @media(max-width:600px){.page-jump-controls{right:10px;bottom:12px;gap:8px}.page-jump{width:40px;height:40px}}
 
-@media(max-width:600px){.header-inner{align-items:flex-start;flex-direction:column}.home{width:100%;text-align:center}.toolbar{grid-template-columns:1fr}.notice{grid-template-columns:1fr;gap:7px}.board-head{flex-direction:column}}
+@media(max-width:600px){.header-inner{align-items:flex-start;flex-direction:column}.home{width:100%;text-align:center}.toolbar{grid-template-columns:1fr}.notice{grid-template-columns:1fr;gap:9px}.notice h3{font-size:1.18rem}.notice p{font-size:1rem}.board-head{flex-direction:column}}
 
 /* CAROLIA shared page navigation: identical on every page */
 .page-float-controls,.page-jump-controls{position:fixed;right:16px;bottom:22px;z-index:90;display:flex;flex-direction:column;gap:10px;pointer-events:none}
@@ -46,6 +46,9 @@ footer{text-align:center;color:#f8e7b5;background:#31070d;padding:22px 16px;font
 .page-float-controls button.is-visible,.page-jump-controls button.is-visible{display:grid}
 .page-float-controls button:hover,.page-jump-controls button:hover{transform:translateY(-2px);background:#07533e}
 @media(max-width:760px){.page-float-controls,.page-jump-controls{right:12px;bottom:18px}.page-float-controls button,.page-jump-controls button{width:44px;height:44px;min-width:44px;font-size:1.2rem}}
+
+/* Shared original CAROLIA footer appearance */
+footer{background:#172a27!important;color:#ffe9ac;text-align:center;padding:28px 16px;border-top:3px solid #d7ad55!important;font-size:1rem;line-height:1.65}footer strong{color:#fff}
 </style>
 </head>
 <body>
